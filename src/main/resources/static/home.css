@@ -1,0 +1,65 @@
+body {
+
+    font-family: 'Poppins', sans-serif;
+    background:#f8f5ef;
+
+}
+
+
+
+.navbar {
+
+    background:#1f1f1f;
+
+}
+
+
+
+.welcome-box {
+
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+
+}
+
+
+
+.gold-btn {
+
+    background:#b8904f;
+    color:white;
+    margin-right:10px;
+
+}
+
+
+
+.gold-btn:hover {
+
+    background:#967238;
+    color:white;
+
+}
+
+
+
+.project-card {
+
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+}
+
+
+
+.project-card img {
+
+    height:250px;
+    width:100%;
+    object-fit:cover;
+
+}

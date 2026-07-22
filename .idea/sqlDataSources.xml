@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="d639bb39-bd0a-4031-a180-ea24f0184872" name="interior_design@localhost Mapping">
+      <data-sources db="93696cf6-436e-4315-a7bc-db13fa67deec" />
+      <scope>
+        <node kind="schema" qname="interior_design" />
+      </scope>
+    </mapping>
+  </component>
+</project>

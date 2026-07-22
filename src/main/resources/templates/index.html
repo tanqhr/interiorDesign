@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<!--<html lang="bg" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">-->
+
+<html lang="bg"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TA&CO Interior Design</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="/">
+            TA&CO
+        </a>
+
+        <button class="navbar-toggler"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav me-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Начало</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Услуги</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Галерия</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Цени</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">За нас</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Контакти</a>
+                </li>
+
+            </ul>
+            <div sec:authorize="isAnonymous()">
+            <a th:href="@{/users/login}" class="btn btn-outline-light me-2">
+                Вход
+            </a>
+
+            <a th:href="@{/users/register}" class="btn gold-btn">
+                Регистрация
+            </a>
+</div>
+            <div sec:authorize="isAuthenticated()" class="user-menu">
+
+                <a th:href="@{/home}" class="projects-btn">
+                    Моите проекти
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+</nav>
+
+
+<section class="hero">
+
+    <div class="container hero-content">
+
+        <h1>
+            Превърнете дома си в мечтано място
+        </h1>
+
+        <p class="lead mt-4 mb-4">
+
+            Качете снимки на Вашето помещение и нашите професионални
+            интериорни дизайнери ще създадат индивидуален проект,
+            съобразен с Вашите желания и бюджет.
+
+        </p>
+
+        <div sec:authorize="isAnonymous()">
+
+            <a href="/users/register"
+               class="btn gold-btn btn-lg me-3">
+
+                Започни проект
+
+            </a>
+
+            <a href="#how"
+               class="btn btn-outline-light btn-lg">
+
+                Научи повече
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="how" class="container py-5">
+
+    <h2 class="text-center mb-5">
+
+        Как работи?
+
+    </h2>
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="card shadow text-center p-4 service-card">
+
+                <h1>📷</h1>
+
+                <h4>1. Качете снимки</h4>
+
+                <p>
+
+                    Добавете снимки на помещението, което желаете да бъде проектирано.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow text-center p-4 service-card">
+
+                <h1>🎨</h1>
+
+                <h4>2. Получете дизайн</h4>
+
+                <p>
+
+                    Нашите дизайнери ще създадат професионален интериорен проект.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow text-center p-4 service-card">
+
+                <h1>🏡</h1>
+
+                <h4>3. Изтеглете проекта</h4>
+
+                <p>
+
+                    След приключване ще получите готовия проект във Вашия профил.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="container py-5">
+
+    <h2 class="text-center mb-5">
+
+        Проектираме
+
+    </h2>
+
+    <div class="row text-center">
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow p-4">
+                <h1>🛁</h1>
+                <h5>Баня</h5>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow p-4">
+                <h1>🍳</h1>
+                <h5>Кухня</h5>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow p-4">
+                <h1>🛋</h1>
+                <h5>Хол</h5>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow p-4">
+                <h1>🛏</h1>
+                <h5>Спалня</h5>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="bg-white py-5">
+
+    <div class="container">
+
+        <h2 class="text-center mb-5">
+
+            Защо TA&CO?
+
+        </h2>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item">✔ Индивидуален интериорен проект</li>
+
+                    <li class="list-group-item">✔ Опитни дизайнери</li>
+
+                    <li class="list-group-item">✔ Онлайн комуникация</li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item">✔ Сигурно онлайн плащане</li>
+
+                    <li class="list-group-item">✔ Бързо изпълнение</li>
+
+                    <li class="list-group-item">✔ Готов проект за изтегляне</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer class="py-5">
+
+    <div class="container text-center">
+
+        <h3>TA&CO Interior Design</h3>
+
+        <p>
+
+            Интериорен дизайн за домове, офиси и обществени пространства.
+
+        </p>
+
+        <hr>
+
+        <p>
+
+            📞 +359 888 123 456
+
+        </p>
+
+        <p>
+
+            ✉ office@taco-design.bg
+
+        </p>
+
+        <small>
+
+            © 2026 TA&CO Interior Design. Всички права запазени.
+
+        </small>
+
+    </div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="bg"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Нов интериорен проект
+    </title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+
+    <link rel="stylesheet"
+          th:href="@{/project-create.css}">
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+    <div class="container">
+
+
+        <a class="navbar-brand"
+           th:href="@{/}">
+            TA&CO
+        </a>
+
+
+
+        <form th:action="@{/logout}"
+              method="post">
+
+            <button class="btn btn-outline-light">
+                Изход
+            </button>
+
+        </form>
+
+
+    </div>
+
+</nav>
+
+
+
+
+
+<div class="project-container">
+
+
+    <div class="project-card">
+
+
+        <h1>
+            Създай нов проект
+        </h1>
+
+
+        <p>
+            Качи снимки и ни разкажи за твоето пространство.
+            Ние ще създадем интериорна концепция специално за теб.
+        </p>
+
+
+
+
+
+        <form th:action="@{/projects/create}"
+              th:object="${projectDTO}"
+              method="post"
+              enctype="multipart/form-data">
+
+
+
+
+
+            <!-- Име на проекта -->
+
+            <div class="mb-3">
+
+
+                <label class="form-label">
+                    Име на проекта
+                </label>
+
+
+                <input type="text"
+                       class="form-control"
+                       th:field="*{title}"
+                       placeholder="Например: Модерен хол">
+
+
+                <small class="text-danger"
+                       th:errors="*{title}">
+                </small>
+
+
+            </div>
+
+
+
+
+
+
+            <!-- Тип помещение -->
+
+
+            <div class="mb-3">
+
+
+                <label class="form-label">
+                    Тип помещение
+                </label>
+
+
+
+                <select class="form-select"
+                        th:field="*{roomType}">
+
+
+                    <option value="">
+                        Избери помещение
+                    </option>
+
+
+                    <option th:each="type : ${roomTypes}"
+                            th:value="${type}"
+                            th:text="#{${'roomType.' + type.name()}}">>
+
+                    </option>
+
+
+                </select>
+
+
+            </div>
+
+
+
+
+
+
+
+            <!-- Описание -->
+
+
+            <div class="mb-3">
+
+
+                <label class="form-label">
+                    Опиши идеята си
+                </label>
+
+
+
+                <textarea class="form-control"
+                          rows="5"
+                          th:field="*{description}"
+                          placeholder="Например: Искам модерен стил с топли цветове и дървени елементи...">
+                </textarea>
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+            <!-- Снимки -->
+
+
+            <div class="upload-box mb-4">
+
+
+                <label class="form-label">
+
+                    📷 Снимки на помещението
+
+                </label>
+
+
+
+                <input type="file"
+                       class="form-control"
+                       name="images"
+                       multiple
+                       accept="image/*">
+
+
+
+                <small class="text-muted">
+
+                    Можете да качите няколко снимки на помещението.
+
+                </small>
+
+
+            </div>
+
+
+
+
+
+
+
+
+            <!-- Бутони -->
+
+
+            <div class="text-center">
+
+
+                <button type="submit"
+                        class="btn gold-btn me-2">
+
+                    Създай проект
+
+                </button>
+
+
+
+
+                <a th:href="@{/dashboard}"
+                   class="btn btn-secondary">
+
+                    Отказ
+
+                </a>
+
+
+            </div>
+
+
+
+
+        </form>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+</body>
+
+</html>
