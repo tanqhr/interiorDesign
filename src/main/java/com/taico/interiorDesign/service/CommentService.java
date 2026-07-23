@@ -1,4 +1,4 @@
-package com.taico.interiorDesign.services;
+package com.taico.interiorDesign.service;
 
 import com.taico.interiorDesign.model.entity.CommentEntity;
 import org.springframework.stereotype.Service;

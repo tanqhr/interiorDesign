@@ -1,4 +1,4 @@
-package com.taico.interiorDesign.services.impl;
+package com.taico.interiorDesign.service.impl;
 
 import com.taico.interiorDesign.enums.Role;
 import com.taico.interiorDesign.model.dto.UserRegisterDTO;
@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.taico.interiorDesign.repositories.RoleRepository;
 import com.taico.interiorDesign.repositories.UserRepository;
-import com.taico.interiorDesign.services.UserService;
+import com.taico.interiorDesign.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {

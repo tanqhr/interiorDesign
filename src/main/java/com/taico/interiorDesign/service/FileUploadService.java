@@ -1,4 +1,4 @@
-package com.taico.interiorDesign.services;
+package com.taico.interiorDesign.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

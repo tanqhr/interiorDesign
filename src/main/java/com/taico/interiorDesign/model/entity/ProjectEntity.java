@@ -2,6 +2,7 @@ package com.taico.interiorDesign.model.entity;
 
 import com.taico.interiorDesign.enums.ProjectStatus;
 import com.taico.interiorDesign.enums.RoomType;
+import com.taico.interiorDesign.enums.ServiceType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,8 +38,15 @@ import java.util.List;
         @Column(nullable = false)
         private RoomType roomType;
 
-        @Column(nullable = false, precision = 10, scale = 2)
+        @Column(nullable = false, precision = 5, scale = 2)
+        private BigDecimal area;
+
+        @Column(precision = 10, scale = 2)
         private BigDecimal budget;
+
+        @Enumerated(EnumType.STRING)
+        @Column(nullable = false)
+        private ServiceType serviceType;
 
         // ======================
         // STATUS

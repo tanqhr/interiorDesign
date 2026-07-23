@@ -1,6 +1,7 @@
 package com.taico.interiorDesign.web;
 
 import com.taico.interiorDesign.enums.RoomType;
+import com.taico.interiorDesign.enums.ServiceType;
 import com.taico.interiorDesign.model.dto.ProjectCreateDTO;
 import com.taico.interiorDesign.model.entity.ProjectEntity;
 import org.springframework.stereotype.Controller;
@@ -8,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.taico.interiorDesign.repositories.ProjectRepository;
-import com.taico.interiorDesign.services.FileUploadService;
-import com.taico.interiorDesign.services.ImageService;
+import com.taico.interiorDesign.service.FileUploadService;
+import com.taico.interiorDesign.service.ImageService;
 
 
 @Controller
@@ -46,6 +47,11 @@ public class ProjectController {
         model.addAttribute(
                 "roomTypes",
                 RoomType.values()
+        );
+
+        model.addAttribute(
+                "serviceTypes",
+                ServiceType.values()
         );
 
 

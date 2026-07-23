@@ -15,3 +15,6 @@ spring:
   messages:
     basename: i18n/messages
     encoding: UTF-8
+
+app:
+    upload-dir: uploads

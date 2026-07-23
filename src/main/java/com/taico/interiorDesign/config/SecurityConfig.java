@@ -30,9 +30,10 @@ public class SecurityConfig {
                                     "/",
                                     "/users/register",
                                     "/users/login",
-                                    "/style.css",
-                                    "/register.css",
-                                    "/login.css",
+                                    "/services",
+                                    "/css/**",
+                                    "/js/**",
+                                    "/images/**",
                                     "/js/**",
                                     "/images/**"
                             ).permitAll()

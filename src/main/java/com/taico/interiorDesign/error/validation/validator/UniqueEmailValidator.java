@@ -4,7 +4,7 @@ package com.taico.interiorDesign.error.validation.validator;
 import com.taico.interiorDesign.error.annotation.UniqueEmail;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import com.taico.interiorDesign.services.UserService;
+import com.taico.interiorDesign.service.UserService;
 
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
 

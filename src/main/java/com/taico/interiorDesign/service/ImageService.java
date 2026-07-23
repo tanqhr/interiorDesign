@@ -1,4 +1,4 @@
-package com.taico.interiorDesign.services;
+package com.taico.interiorDesign.service;
 
 import com.taico.interiorDesign.model.entity.ImageEntity;
 import com.taico.interiorDesign.model.entity.ProjectEntity;

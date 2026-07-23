@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="bg"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Нашите услуги</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/services.css}">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+    <div class="container">
+
+        <a class="navbar-brand"
+           th:href="@{/}">
+            TA&CO
+        </a>
+
+        <a class="btn btn-outline-light"
+           th:href="@{/projects/create}">
+            Нов проект
+        </a>
+
+    </div>
+
+</nav>
+
+<section class="hero">
+
+    <div class="hero-overlay">
+
+        <div class="container text-center">
+
+            <h1>
+                Превръщаме вашите идеи
+                <br>
+                в красив интериор
+            </h1>
+
+            <p>
+                От първата идея до готовия проект – ние ще ви помогнем
+                да създадете пространство, което отразява вашия стил.
+            </p>
+
+            <a th:href="@{/projects/create}"
+               class="btn btn-gold btn-lg mt-3">
+
+                Започнете своя проект
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h1>Нашите услуги</h1>
+
+        <p class="lead text-muted">
+            Изберете услугата, която най-добре отговаря на вашите нужди.
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Интериорен дизайн -->
+        <div class="col-lg-6">
+
+            <div class="service-card h-100">
+
+                <div class="icon">
+                    <i class="bi bi-house-heart"></i>
+                </div>
+
+                <h3>Интериорен дизайн</h3>
+
+                <p>
+                    Създаваме цялостна концепция за вашето пространство,
+                    съобразена с начина ви на живот.
+                </p>
+
+                <h6>Включва:</h6>
+
+                <ul>
+                    <li>Концепция и стил</li>
+                    <li>Разпределение на мебелите</li>
+                    <li>Цветова палитра</li>
+                    <li>Материали и настилки</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- 3D -->
+        <div class="col-lg-6">
+
+            <div class="service-card h-100">
+
+                <div class="icon">
+                    <i class="bi bi-badge-3d"></i>
+                </div>
+
+                <h3>Интериорен дизайн + 3D визуализация</h3>
+
+                <p>
+                    Вижте бъдещия си дом още преди ремонтът да е започнал.
+                </p>
+
+                <h6>Включва:</h6>
+
+                <ul>
+                    <li>Всичко от интериорния дизайн</li>
+                    <li>Фотореалистични 3D визуализации</li>
+                    <li>Различни гледни точки</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- Пълен проект -->
+        <div class="col-lg-6">
+
+            <div class="service-card h-100">
+
+                <div class="icon">
+                    <i class="bi bi-rulers"></i>
+                </div>
+
+                <h3>Пълен интериорен проект</h3>
+
+                <p>
+                    Подготвяме всички необходими документи за изпълнение.
+                </p>
+
+                <h6>Включва:</h6>
+
+                <ul>
+                    <li>Интериорен дизайн</li>
+                    <li>3D визуализации</li>
+                    <li>Технически чертежи</li>
+                    <li>Осветление</li>
+                    <li>Електро план</li>
+                    <li>Спецификация на мебели</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- Консултация -->
+        <div class="col-lg-6">
+
+            <div class="service-card h-100">
+
+                <div class="icon">
+                    <i class="bi bi-chat-dots"></i>
+                </div>
+
+                <h3>Онлайн консултация</h3>
+
+                <p>
+                    Получете професионални насоки без изготвяне на пълен проект.
+                </p>
+
+                <h6>Подходяща за:</h6>
+
+                <ul>
+                    <li>Избор на цветове</li>
+                    <li>Избор на мебели</li>
+                    <li>Разпределение</li>
+                    <li>Практически съвети</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="text-center mt-5">
+
+        <a class="btn btn-gold btn-lg"
+           th:href="@{/projects/create}">
+            Създай нов проект
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
