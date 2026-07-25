@@ -44,12 +44,21 @@ public class SecurityConfig {
                             .anyRequest()
                             .authenticated()
                     )
-
                     .formLogin(login -> login
                             .loginPage("/users/login")
                             .usernameParameter("email")
                             .passwordParameter("password")
-                            .defaultSuccessUrl("/home", true)
+                            .successHandler((request, response, authentication) -> {
+
+                                boolean isAdmin = authentication.getAuthorities().stream()
+                                        .anyMatch(a -> a.getAuthority().equals("ADMIN"));
+
+                                if (isAdmin) {
+                                    response.sendRedirect("/admin");
+                                } else {
+                                    response.sendRedirect("/home");
+                                }
+                            })
                             .permitAll()
                     )
 

@@ -44,6 +44,13 @@ import java.util.List;
         @Column(precision = 10, scale = 2)
         private BigDecimal budget;
 
+        @Column(precision = 10, scale = 2)
+        private BigDecimal price;
+
+
+        @Column(columnDefinition = "TEXT")
+        private String adminNote;
+
         @Enumerated(EnumType.STRING)
         @Column(nullable = false)
         private ServiceType serviceType;

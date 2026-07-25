@@ -4,13 +4,20 @@ import com.taico.interiorDesign.enums.RoomType;
 import com.taico.interiorDesign.enums.ServiceType;
 import com.taico.interiorDesign.model.dto.ProjectCreateDTO;
 import com.taico.interiorDesign.model.entity.ProjectEntity;
+import com.taico.interiorDesign.service.ProjectService;
+import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.taico.interiorDesign.repositories.ProjectRepository;
 import com.taico.interiorDesign.service.FileUploadService;
 import com.taico.interiorDesign.service.ImageService;
+
+import java.io.IOException;
+import java.util.List;
 
 
 @Controller
@@ -20,13 +27,15 @@ public class ProjectController {
     private final FileUploadService fileUploadService;
     private final ProjectRepository projectRepository;
     private final ImageService imageService;
+    private final ProjectService projectService;
 
     public ProjectController(FileUploadService fileUploadService,
                              ProjectRepository projectRepository,
-                             ImageService imageService) {
+                             ImageService imageService, ProjectService projectService) {
         this.fileUploadService = fileUploadService;
         this.projectRepository = projectRepository;
         this.imageService = imageService;
+        this.projectService = projectService;
     }
 
 
@@ -79,4 +88,36 @@ public class ProjectController {
 
         return "redirect:/projects/" + id;
     }
+
+    @PostMapping("/create")
+    public String createProject(
+            @Valid @ModelAttribute("projectDTO") ProjectCreateDTO dto,
+            BindingResult bindingResult,
+            @RequestParam("images") List<MultipartFile> images,
+            Authentication authentication,
+            Model model) throws IOException {
+
+        if (bindingResult.hasErrors()) {
+
+            model.addAttribute("roomTypes", RoomType.values());
+            model.addAttribute("serviceTypes", ServiceType.values());
+
+            return "project-create";
+        }
+
+        projectService.createProject(dto, images, authentication);
+
+        return "redirect:/home";
+    }
+
+    @GetMapping("/{id}")
+    public String projectDetails(@PathVariable Long id, Model model) {
+
+        ProjectEntity project = projectService.findById(id);
+
+        model.addAttribute("project", project);
+
+        return "project-details";
+    }
+
 }

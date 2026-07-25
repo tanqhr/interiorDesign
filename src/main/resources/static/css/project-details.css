@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    font-family: 'Montserrat', sans-serif;
+
+    background:
+            linear-gradient(
+                    rgba(20, 20, 20, 0.97),
+                    rgba(20, 20, 20, 0.99)
+            );
+
+    color: #ffffff;
+
+}
+
+
+/* NAVBAR */
+
+.navbar {
+
+    padding: 22px 0;
+
+    background: #171717;
+
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+
+}
+
+
+.navbar-brand {
+
+    color: #d4af37 !important;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+}
+
+
+.back-btn {
+
+    color: #d4af37;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+
+}
+
+
+.back-btn:hover {
+
+    color: #ffffff;
+
+}
+
+
+/* MAIN */
+
+.project-container {
+
+    padding-top: 70px;
+
+    padding-bottom: 90px;
+
+}
+
+
+/* HEADER */
+
+.project-header {
+
+    margin-bottom: 45px;
+
+}
+
+
+.project-label {
+
+    color: #d4af37;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 3px;
+
+}
+
+
+.project-header h1 {
+
+    margin-top: 14px;
+
+    margin-bottom: 18px;
+
+    font-size: clamp(36px, 5vw, 64px);
+
+    font-weight: 600;
+
+}
+
+
+.project-header p {
+
+    max-width: 800px;
+
+    color: #a5a5a5;
+
+    line-height: 1.8;
+
+    font-size: 16px;
+
+}
+
+
+/* DETAILS */
+
+.details-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 70px;
+
+}
+
+
+.detail-card {
+
+    padding: 25px;
+
+    min-height: 120px;
+
+    border-radius: 14px;
+
+    background: #242424;
+
+    border: 1px solid rgba(212, 175, 55, 0.18);
+
+    transition: 0.3s;
+
+}
+
+
+.detail-card:hover {
+
+    transform: translateY(-5px);
+
+    border-color: rgba(212, 175, 55, 0.6);
+
+}
+
+
+.detail-label {
+
+    display: block;
+
+    margin-bottom: 14px;
+
+    color: #888;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.detail-card strong {
+
+    color: #d4af37;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+}
+
+
+.status {
+
+    text-transform: uppercase;
+
+}
+
+
+/* GALLERY */
+
+.gallery-section {
+
+    margin-top: 40px;
+
+}
+
+
+.section-heading {
+
+    margin-bottom: 25px;
+
+}
+
+
+.section-heading span {
+
+    color: #d4af37;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 3px;
+
+}
+
+
+.section-heading h2 {
+
+    margin-top: 10px;
+
+    font-size: 32px;
+
+}
+
+
+.gallery {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 24px;
+
+}
+
+
+.gallery-item {
+
+    overflow: hidden;
+
+    min-height: 300px;
+
+    border-radius: 18px;
+
+    background: #242424;
+
+}
+
+
+.gallery-item:first-child {
+
+    grid-column: span 2;
+
+    min-height: 520px;
+
+}
+
+
+.gallery-item img {
+
+    width: 100%;
+
+    height: 100%;
+
+    min-height: 300px;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: transform 0.5s ease;
+
+}
+
+
+.gallery-item:first-child img {
+
+    min-height: 520px;
+
+}
+
+
+.gallery-item:hover img {
+
+    transform: scale(1.05);
+
+}
+
+
+/* EMPTY GALLERY */
+
+.empty-gallery {
+
+    padding: 80px 30px;
+
+    text-align: center;
+
+    border: 1px dashed #555;
+
+    border-radius: 18px;
+
+    background: #202020;
+
+}
+
+
+.empty-icon {
+
+    margin-bottom: 20px;
+
+    font-size: 55px;
+
+}
+
+
+.empty-gallery h3 {
+
+    margin-bottom: 12px;
+
+}
+
+
+.empty-gallery p {
+
+    color: #999;
+
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+
+    .details-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .project-container {
+
+        padding-top: 40px;
+
+    }
+
+
+    .details-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .gallery {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .gallery-item:first-child {
+
+        grid-column: span 1;
+
+        min-height: 320px;
+
+    }
+
+
+    .gallery-item:first-child img {
+
+        min-height: 320px;
+
+    }
+
+}

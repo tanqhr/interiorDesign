@@ -83,77 +83,44 @@
 
     <div class="row mt-4">
 
-
-        <div class="col-md-4">
-
-
-            <div class="project-card">
-
-
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c"
-                     class="img-fluid">
-
-
-                <div class="p-3">
-
-                    <h4>
-                        Модерен хол
-                    </h4>
-
-
-                    <button class="btn btn-dark">
-                        Отвори
-                    </button>
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-
-
-
-
-        <div class="col-md-4">
+        <div class="col-md-4"
+             th:each="project : ${projects}">
 
 
             <div class="project-card">
 
+                <div th:if="${!project.images.isEmpty()}">
+                    <img th:src="@{'/' + ${project.images[0].filePath}}"
+                         class="img-fluid">
+                </div>
 
-                <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea"
-                     class="img-fluid">
+                <div th:if="${project.images.isEmpty()}">
+                    <img src="/images/interiorDesign.jpg"
+                         class="img-fluid">
+                </div>
 
 
                 <div class="p-3">
 
-                    <h4>
-                        Кухненски дизайн
+                    <h4 th:text="${project.title}">
+                        Име на проект
                     </h4>
 
-
-                    <button class="btn btn-dark">
+                    <a th:href="@{/projects/{id}(id=${project.id})}"
+                       class="btn btn-dark">
                         Отвори
-                    </button>
+                    </a>
 
                 </div>
 
-
+            </div>
             </div>
 
-
         </div>
-
-
-
 
     </div>
 
 
-
-</div>
 
 
 

@@ -10,12 +10,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+
 @Service
 public class FileUploadService {
 
     private static final String UPLOAD_DIR = "uploads/";
 
-    public String uploadFile(MultipartFile file, Long projectId) throws IOException {
+    public String uploadFile(MultipartFile file, Long projectId) {
 
         if (file.isEmpty()) {
             throw new IllegalArgumentException("File is empty");
@@ -29,6 +30,7 @@ public class FileUploadService {
             dir.mkdirs();
         }
 
+
         // 2. Generate unique file name
         String originalFilename = file.getOriginalFilename();
         String extension = getExtension(originalFilename);
@@ -38,11 +40,18 @@ public class FileUploadService {
         // 3. Full path
         Path filePath = Paths.get(projectFolder, fileName);
 
-        // 4. Save file
-        Files.write(filePath, file.getBytes());
+//        // 4. Save file
+//        Files.write(filePath, file.getBytes());
 
-        // 5. Return relative path for DB
-        return "uploads/projects/" + projectId + "/" + fileName;
+
+        try {
+            Files.write(filePath, file.getBytes());
+            return "uploads/projects/" + projectId + "/" + fileName;
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to upload file", e);
+        }
+//        // 5. Return relative path for DB
+//        return "uploads/projects/" + projectId + "/" + fileName;
     }
 
     private String getExtension(String filename) {
