@@ -36,4 +36,6 @@ public interface ProjectService {
 
 
     ProjectEntity findById(Long id);
+
+    void payProject(Long id, String paymentMethod);
 }

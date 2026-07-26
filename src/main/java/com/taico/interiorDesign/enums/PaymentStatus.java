@@ -6,6 +6,21 @@ public enum PaymentStatus {
     PENDING,
     PAID,
     FAILED,
-    REFUNDED
+    REFUNDED,
+
+    NEW,
+
+    IN_PROGRESS,
+
+    WAITING_FOR_PAYMENT,
+
+
+    DESIGN_IN_PROGRESS,
+
+    DESIGN_READY,
+
+    COMPLETED,
+
+    CANCELLED
 
 }

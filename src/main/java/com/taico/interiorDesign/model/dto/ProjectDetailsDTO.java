@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -56,12 +57,17 @@ public class ProjectDetailsDTO {
 
     private ProjectStatus status;
 
+    private BigDecimal area;
+
+    private List<ImageDTO> images = new ArrayList<>();
+
+    private String author;
 
     // ======================
     // IMAGES
     // ======================
 
-    private List<String> images;
+    //private List<String> images;
 
 
     // ======================

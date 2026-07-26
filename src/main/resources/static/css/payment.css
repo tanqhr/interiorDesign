@@ -1,0 +1,237 @@
+body {
+
+    min-height: 100vh;
+
+    margin: 0;
+
+    background: #1c1c1c;
+
+    color: white;
+
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+
+.navbar {
+
+    padding: 22px 0;
+
+    background: #171717;
+
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+
+}
+
+
+.navbar-brand {
+
+    color: #d4af37 !important;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+}
+
+
+.back-btn {
+
+    color: #d4af37;
+
+    text-decoration: none;
+
+}
+
+
+.payment-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    padding-top: 70px;
+
+    padding-bottom: 70px;
+
+}
+
+
+.payment-card {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    padding: 40px;
+
+    border-radius: 18px;
+
+    background: #242424;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+
+}
+
+
+.payment-header {
+
+    margin-bottom: 35px;
+
+}
+
+
+.payment-header span {
+
+    color: #d4af37;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.payment-header h1 {
+
+    margin-top: 12px;
+
+    font-size: 32px;
+
+}
+
+
+.project-summary {
+
+    padding: 25px;
+
+    border-radius: 14px;
+
+    background: #1c1c1c;
+
+}
+
+
+.project-summary h3 {
+
+    color: #d4af37;
+
+}
+
+
+.project-summary p {
+
+    color: #999;
+
+}
+
+
+.summary-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #333;
+
+}
+
+
+.summary-row span {
+
+    color: #aaa;
+
+}
+
+
+.summary-row strong {
+
+    color: white;
+
+}
+
+
+.total-row {
+
+    margin-top: 10px;
+
+    border-bottom: none;
+
+}
+
+
+.total-row strong {
+
+    color: #d4af37;
+
+    font-size: 24px;
+
+}
+
+
+.payment-method {
+
+    margin-top: 30px;
+
+}
+
+
+.payment-method h4 {
+
+    margin-bottom: 20px;
+
+}
+
+
+.method-option {
+
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    border: 1px solid #444;
+
+    border-radius: 10px;
+
+}
+
+
+.method-option label {
+
+    margin-left: 10px;
+
+}
+
+
+.pay-button {
+
+    width: 100%;
+
+    margin-top: 30px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #d4af37;
+
+    color: #171717;
+
+    font-weight: 700;
+
+    font-size: 17px;
+
+}
+
+
+.pay-button:hover {
+
+    background: #f0cc5b;
+
+}

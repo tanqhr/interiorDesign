@@ -23,7 +23,7 @@
     <div class="container">
 
         <a class="navbar-brand"
-           th:href="@{/templates/admin}">
+           th:href="@{/admin}">
             TA&CO Admin
         </a>
 
@@ -203,7 +203,8 @@
                      th:each="image : ${project.images}">
 
                     <img
-                            th:src="@{${image}}"
+
+                            th:src="@{'/' + ${image.filePath}}"
                             class="img-fluid rounded shadow">
 
                 </div>

@@ -1,9 +1,7 @@
 package com.taico.interiorDesign.service.impl;
 
-import com.taico.interiorDesign.model.dto.ProjectCreateDTO;
-import com.taico.interiorDesign.model.dto.ProjectDetailsDTO;
-import com.taico.interiorDesign.model.dto.ProjectUpdateDTO;
-import com.taico.interiorDesign.model.dto.ProjectViewDTO;
+import com.taico.interiorDesign.enums.ProjectStatus;
+import com.taico.interiorDesign.model.dto.*;
 import com.taico.interiorDesign.model.entity.ImageEntity;
 import com.taico.interiorDesign.model.entity.ProjectEntity;
 import com.taico.interiorDesign.model.entity.UserEntity;
@@ -13,6 +11,7 @@ import com.taico.interiorDesign.security.CurrentUser;
 import com.taico.interiorDesign.service.FileUploadService;
 import com.taico.interiorDesign.service.ImageService;
 import com.taico.interiorDesign.service.ProjectService;
+import jakarta.transaction.Transactional;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,10 +45,7 @@ class ProjectServiceImpl implements ProjectService {
                 .toList();
     }
 
-    @Override
-    public ProjectDetailsDTO getProjectById(Long id) {
-        return null;
-    }
+
 
     private ProjectViewDTO mapToViewDto(ProjectEntity project) {
 
@@ -64,6 +60,98 @@ class ProjectServiceImpl implements ProjectService {
         dto.setAuthor(project.getAuthor().getFirstName()
                 + " "
                 + project.getAuthor().getLastName());
+
+        return dto;
+    }
+
+
+
+    @Override
+    @Transactional
+    public ProjectDetailsDTO getProjectById(Long id) {
+
+        ProjectEntity project = projectRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Проектът не е намерен с id: " + id
+                        )
+                );
+
+        ProjectDetailsDTO dto = new ProjectDetailsDTO();
+
+        dto.setId(project.getId());
+
+        dto.setTitle(project.getTitle());
+
+        dto.setDescription(
+                project.getDescription()
+        );
+
+        dto.setRoomType(
+                project.getRoomType()
+        );
+
+        dto.setArea(
+                project.getArea()
+        );
+
+        dto.setBudget(
+                project.getBudget()
+        );
+
+        dto.setPrice(
+                project.getPrice()
+        );
+
+        dto.setServiceType(
+                project.getServiceType()
+        );
+
+        dto.setStatus(
+                project.getStatus()
+        );
+
+        dto.setAuthor(
+                project.getAuthor().getFirstName()
+                        + " "
+                        + project.getAuthor().getLastName()
+        );
+
+        dto.setCreatedAt(
+                project.getCreatedAt()
+        );
+
+        dto.setUpdatedAt(
+                project.getUpdatedAt()
+        );
+
+
+        List<ImageDTO> images = project.getImages()
+                .stream()
+                .map(image -> {
+
+                    ImageDTO imageDTO = new ImageDTO();
+
+                    imageDTO.setId(
+                            image.getId()
+                    );
+
+                    imageDTO.setFileName(
+                            image.getFileName()
+                    );
+
+                    imageDTO.setFilePath(
+                            image.getFilePath()
+                    );
+
+                    return imageDTO;
+
+                })
+                .toList();
+
+
+        dto.setImages(images);
+
 
         return dto;
     }
@@ -111,8 +199,21 @@ class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @Transactional
     public void updateProject(Long id, ProjectUpdateDTO dto) {
 
+        ProjectEntity project = projectRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Проектът не е намерен с id: " + id)
+                );
+
+        project.setPrice(dto.getPrice());
+
+        project.setStatus(dto.getStatus());
+
+        project.setAdminNote(dto.getAdminNote());
+
+        projectRepository.save(project);
     }
     @Override
     public List<ProjectEntity> findAll() {
@@ -162,7 +263,17 @@ class ProjectServiceImpl implements ProjectService {
         dto.setImages(
                 project.getImages()
                         .stream()
-                        .map(ImageEntity::getFilePath)
+                        .map(image -> {
+
+                            ImageDTO imageDTO = new ImageDTO();
+
+                            imageDTO.setId(image.getId());
+                            imageDTO.setFileName(image.getFileName());
+                            imageDTO.setFilePath(image.getFilePath());
+
+                            return imageDTO;
+
+                        })
                         .toList()
         );
 
@@ -182,5 +293,20 @@ public ProjectEntity findById(Long id) {
         return projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Проектът не е намерен"));
     }
+    @Transactional
+    public void payProject(
+            Long projectId,
+            String paymentMethod
+    ) {
 
+        ProjectEntity project =
+                projectRepository.findById(projectId)
+                        .orElseThrow();
+
+        project.setStatus(
+                ProjectStatus.PAID
+        );
+
+        projectRepository.save(project);
+    }
 }

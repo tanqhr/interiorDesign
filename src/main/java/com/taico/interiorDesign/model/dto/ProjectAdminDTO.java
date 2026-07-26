@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,6 +23,9 @@ import java.math.BigDecimal;
         private String status;
 
         private BigDecimal price;
+
+        private List<ImageDTO> images = new ArrayList<>();
+
 
     }
 
