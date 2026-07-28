@@ -215,6 +215,165 @@
 
     </div>
 
+    <!-- Дизайн на проекта -->
+
+    <div class="card shadow-sm mt-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <div>
+
+                    <h4 class="mb-1">
+                        Дизайн на проекта
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Качете готовите файлове за клиента.
+                    </p>
+
+                </div>
+
+                <span th:if="${project.status.name() == 'PAID'}"
+                      class="badge bg-warning text-dark">
+
+                Платено — очаква дизайн
+
+            </span>
+
+                <span th:if="${project.status.name() == 'DESIGN_READY'}"
+                      class="badge bg-success">
+
+                Дизайнът е готов
+
+            </span>
+
+            </div>
+
+
+            <!-- Качване -->
+
+            <form th:action="@{/admin/projects/{id}/design(id=${project.id})}"
+                  method="post"
+                  enctype="multipart/form-data">
+
+                <div class="upload-area">
+
+                    <div class="upload-icon">
+                        📁
+                    </div>
+
+                    <h5>
+                        Качете дизайн
+                    </h5>
+
+                    <p class="text-muted">
+                        PDF, JPG, PNG или ZIP
+                    </p>
+
+                    <input
+                            type="file"
+                            name="file"
+                            class="form-control"
+                            accept=".pdf,.jpg,.jpeg,.png,.zip"
+                            required>
+
+                </div>
+
+                <div class="text-end mt-3">
+
+                    <button type="submit"
+                            class="btn btn-dark px-4">
+
+                        ↑ Качи дизайн
+
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- Качени файлове -->
+
+            <div class="mt-5"
+                 th:if="${project.designs != null and !project.designs.isEmpty()}">
+
+                <h5 class="mb-3">
+                    Качени файлове
+                </h5>
+
+                <div class="design-file-list">
+
+                    <div class="design-file-item"
+                         th:each="design : ${project.designs}">
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="file-icon">
+                                📄
+                            </div>
+
+                            <div>
+
+                                <strong th:text="${design.fileName}">
+                                    project.pdf
+                                </strong>
+
+                                <small class="d-block text-muted">
+
+                                <span th:text="${design.contentType}">
+                                    PDF
+                                </span>
+
+                                    ·
+
+                                    <span
+                                            th:text="${#numbers.formatDecimal(design.fileSize / 1024.0, 0, 2) + ' KB'}">
+                                    100 KB
+                                </span>
+
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <a th:href="@{/admin/designs/{id}/download(id=${design.id})}"
+                           class="btn btn-outline-dark btn-sm">
+
+                            Изтегли
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Няма файлове -->
+
+            <div class="text-center text-muted py-4"
+                 th:if="${project.designs == null or project.designs.isEmpty()}">
+
+                <div class="fs-2 mb-2">
+                    📂
+                </div>
+
+                <p class="mb-0">
+                    Все още няма качени файлове.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
 </body>

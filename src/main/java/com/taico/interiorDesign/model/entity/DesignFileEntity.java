@@ -29,7 +29,7 @@ public class DesignFileEntity {
     private Long fileSize;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id", nullable = false, unique = true)
+    @JoinColumn(name = "project_id", nullable = false)
     private ProjectEntity project;
 
     @Column(updatable = false)

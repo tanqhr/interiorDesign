@@ -61,6 +61,8 @@ public class ProjectDetailsDTO {
 
     private List<ImageDTO> images = new ArrayList<>();
 
+    private List<DesignFileDTO> designs = new ArrayList<>();
+
     private String author;
 
     // ======================

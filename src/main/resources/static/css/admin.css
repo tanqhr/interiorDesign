@@ -279,4 +279,60 @@ body {
 
         font-size: .9rem;
     }
+
+    .upload-area {
+        padding: 35px;
+        text-align: center;
+        border: 2px dashed #d4af37;
+        border-radius: 14px;
+        background: #fafafa;
+    }
+
+    .upload-icon {
+        font-size: 42px;
+        margin-bottom: 10px;
+    }
+
+    .upload-area input[type="file"] {
+        max-width: 500px;
+        margin: 20px auto 0;
+    }
+
+    .design-file-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .design-file-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 18px;
+        border: 1px solid #e5e5e5;
+        border-radius: 12px;
+        background: #fff;
+    }
+
+    .file-icon {
+        width: 45px;
+        height: 45px;
+        margin-right: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background: #f3f3f3;
+        font-size: 22px;
+    }
+
+    @media (max-width: 768px) {
+
+        .design-file-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+    }
 }
