@@ -20,11 +20,7 @@ public interface ProjectService {
 
     ProjectDetailsDTO getProjectById(Long id);
 
-    void createProject(
-            ProjectCreateDTO dto,
-            List<MultipartFile> images,
-            Authentication authentication
-    ) throws IOException;
+    void createProject(ProjectCreateDTO dto, List<MultipartFile> images, Authentication authentication) throws IOException;
 
     List<ProjectEntity> findAll();
 
@@ -41,4 +37,6 @@ public interface ProjectService {
     void payProject(Long id, String paymentMethod);
 
     void uploadDesignFile(Long projectId, MultipartFile file, Authentication authentication);
+
+    ProjectEntity findByIdForUser(Long projectId, Authentication authentication);
 }

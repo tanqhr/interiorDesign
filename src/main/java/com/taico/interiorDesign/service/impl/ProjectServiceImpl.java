@@ -33,7 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public
 
-class ProjectServiceImpl implements ProjectService {
+ class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
@@ -524,6 +524,34 @@ public ProjectEntity findById(Long id) {
             throw new RuntimeException(
                     "Грешка при качването на файла.", e);
         }
+    }
+
+
+    @Override
+    public ProjectEntity findByIdForUser(
+            Long projectId,
+            Authentication authentication) {
+
+        CurrentUser currentUser =
+                (CurrentUser) authentication.getPrincipal();
+
+        ProjectEntity project =
+                projectRepository.findById(projectId)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Проектът не е намерен"
+                                )
+                        );
+
+        if (!project.getAuthor().getId()
+                .equals(currentUser.getId())) {
+
+            throw new RuntimeException(
+                    "Нямате достъп до този проект."
+            );
+        }
+
+        return project;
     }
 
 }

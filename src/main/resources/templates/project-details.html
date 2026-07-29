@@ -258,6 +258,108 @@
 
     </section>
 
+    <!-- ГОТОВ ПРОЕКТ -->
+
+    <section class="design-section"
+             th:if="${project.designs != null and !project.designs.isEmpty()}">
+
+        <div class="section-heading">
+
+        <span>
+            ФИНАЛЕН ПРОЕКТ
+        </span>
+
+            <h2>
+                Вашият готов дизайн
+            </h2>
+
+            <p>
+                Файлът с готовия проект е наличен за преглед и изтегляне.
+            </p>
+
+        </div>
+
+
+        <div class="design-files">
+
+            <div class="design-file"
+                 th:each="design : ${project.designs}">
+
+                <div class="design-info">
+
+                    <div class="design-icon">
+                        📐
+                    </div>
+
+                    <div>
+
+                        <h4 th:text="${design.fileName}">
+                            interior-design.pdf
+                        </h4>
+
+                        <small th:if="${design.fileSize != null}"
+                               th:text="${#numbers.formatDecimal(design.fileSize / 1024.0 / 1024.0, 1, 2) + ' MB'}">
+                            2.50 MB
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="design-actions">
+
+                    <!-- Отвори -->
+
+                    <a class="btn btn-dark"
+                       target="_blank"
+                       th:href="@{/projects/{projectId}/designs/{fileId}
+                       (projectId=${project.id}, fileId=${design.id})}">
+
+                        Отвори
+
+                    </a>
+
+
+                    <!-- Изтегли -->
+
+                    <a class="btn btn-dark"
+                       th:href="@{/projects/{projectId}/designs/{fileId}/download
+                       (projectId=${project.id}, fileId=${design.id})}">
+
+                        Изтегли
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- НЯМА ГОТОВ ПРОЕКТ -->
+
+    <section class="empty-design"
+             th:if="${project.designs == null or project.designs.isEmpty()}">
+
+        <div class="empty-icon">
+            📐
+        </div>
+
+        <h3>
+            Проектът все още се обработва
+        </h3>
+
+        <p>
+            Когато дизайнът бъде готов, той ще се появи тук.
+        </p>
+
+    </section>
+
+
 
 </main>
 
