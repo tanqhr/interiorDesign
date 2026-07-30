@@ -554,4 +554,30 @@ public ProjectEntity findById(Long id) {
         return project;
     }
 
+    @Override
+    @Transactional
+    public void deleteUnpaidProject(Long projectId) {
+
+        ProjectEntity project =
+                projectRepository.findById(projectId)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Проектът не е намерен."
+                                )
+                        );
+
+        if (project.getStatus() == ProjectStatus.PAID
+                || project.getStatus() == ProjectStatus.IN_PROGRESS
+                || project.getStatus() == ProjectStatus.WAITING_FOR_CLIENT
+                || project.getStatus() == ProjectStatus.DESIGN_READY
+                || project.getStatus() == ProjectStatus.COMPLETED) {
+
+            throw new RuntimeException(
+                    "Платен проект не може да бъде изтрит."
+            );
+        }
+
+        projectRepository.delete(project);
+    }
+
 }

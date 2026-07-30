@@ -39,4 +39,6 @@ public interface ProjectService {
     void uploadDesignFile(Long projectId, MultipartFile file, Authentication authentication);
 
     ProjectEntity findByIdForUser(Long projectId, Authentication authentication);
+
+    void deleteUnpaidProject(Long projectId);
 }

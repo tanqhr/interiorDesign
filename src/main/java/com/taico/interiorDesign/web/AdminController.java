@@ -5,6 +5,7 @@ import com.taico.interiorDesign.service.ProjectService;
 import com.taico.interiorDesign.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,4 +48,44 @@ public class AdminController {
         return "redirect:/admin/projects/" + id;
     }
 
+
+    @PostMapping("/projects/{id}/delete")
+    public String deleteProject(
+            @PathVariable Long id) {
+
+        projectService.deleteUnpaidProject(id);
+
+        return "redirect:/admin/projects";
+    }
+
+    @PostMapping("/users/{id}/deactivate")
+    public String deactivateUser(
+            @PathVariable Long id) {
+
+        userService.deactivateUser(id);
+
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/users")
+    public String users(Model model) {
+
+        model.addAttribute(
+                "users",
+                userService.findAll()
+        );
+
+        return "admin/users";
+    }
+
+
+
+    @PostMapping("/users/{id}/activate")
+    public String activateUser(
+            @PathVariable Long id) {
+
+        userService.activateUser(id);
+
+        return "redirect:/admin/users";
+    }
 }

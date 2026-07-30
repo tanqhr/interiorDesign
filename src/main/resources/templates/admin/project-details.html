@@ -179,6 +179,21 @@
 
                         </button>
 
+                        <div th:if="${project.status.name() == 'NEW' or project.status.name() == 'PENDING_PAYMENT'}" class="mt-4">
+
+                            <form th:action="@{/admin/projects/{id}/delete(id=${project.id})}"
+                                  method="post" onsubmit="return confirm('Сигурни ли сте, че искате да изтриете този проект?');">
+
+                                <button type="submit" class="btn btn-outline-danger w-100">
+
+                                    Изтрий неплатения проект
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
                     </form>
 
                 </div>

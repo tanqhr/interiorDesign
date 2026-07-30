@@ -4,6 +4,7 @@ import com.taico.interiorDesign.enums.Role;
 import com.taico.interiorDesign.model.dto.UserRegisterDTO;
 import com.taico.interiorDesign.model.entity.RoleEntity;
 import com.taico.interiorDesign.model.entity.UserEntity;
+import jakarta.transaction.Transactional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.taico.interiorDesign.repositories.RoleRepository;
 import com.taico.interiorDesign.repositories.UserRepository;
 import com.taico.interiorDesign.service.UserService;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -96,6 +99,43 @@ public class UserServiceImpl implements UserService {
                 .build();
     }
 
+    @Override
+    @Transactional
+    public void deactivateUser(Long userId) {
 
+        UserEntity user =
+                userRepository.findById(userId)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Потребителят не е намерен."
+                                )
+                        );
+
+        user.setActive(false);
+
+        userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void activateUser(Long userId) {
+
+        UserEntity user =
+                userRepository.findById(userId)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Потребителят не е намерен."
+                                )
+                        );
+
+        user.setActive(true);
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public List<UserEntity> findAll() {
+        return userRepository.findAll();
+    }
 
 }

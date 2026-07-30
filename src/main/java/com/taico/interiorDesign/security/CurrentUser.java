@@ -25,11 +25,21 @@ public class CurrentUser extends User {
     private String lastName;
 
 
-    public CurrentUser(String username,
-                       String password,
-                       Collection<? extends GrantedAuthority> authorities) {
+    public CurrentUser(
+            String username,
+            String password,
+            boolean enabled,
+            Collection<? extends GrantedAuthority> authorities) {
 
-        super(username, password, authorities);
+        super(
+                username,
+                password,
+                true,       // accountNonExpired
+                true,       // credentialsNonExpired
+                true,       // accountNonLocked
+                enabled,    // enabled
+                authorities
+        );
     }
 
 
@@ -40,16 +50,14 @@ public class CurrentUser extends User {
         return new CurrentUser(
                 user.getEmail(),
                 user.getPassword(),
+                user.isActive(),
                 user.getRoles()
                         .stream()
                         .map(role ->
                                 new SimpleGrantedAuthority(
                                         role.getRole().name()
                                 ))
-                        .toList()
-        )
-                .setId(user.getId())
-                .setFirstName(user.getFirstName())
-                .setLastName(user.getLastName());
+                        .toList());
     }
+
 }
