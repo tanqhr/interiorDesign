@@ -57,7 +57,11 @@ public class CurrentUser extends User {
                                 new SimpleGrantedAuthority(
                                         role.getRole().name()
                                 ))
-                        .toList());
+                        .toList())
+
+                .setId(user.getId())
+                .setFirstName(user.getFirstName())
+                .setLastName(user.getLastName());
     }
 
 }

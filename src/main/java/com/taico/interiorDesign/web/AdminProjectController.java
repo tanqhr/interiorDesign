@@ -69,4 +69,12 @@ public class AdminProjectController {
         return "redirect:/admin/projects/" + id;
     }
 
+//    @PostMapping("/{id}/delete")
+//    public String deleteUnpaidProject(@PathVariable Long id) {
+//
+//        projectService.deleteUnpaidProject(id);
+//
+//        return "redirect:/admin/projects";
+//    }
+
 }

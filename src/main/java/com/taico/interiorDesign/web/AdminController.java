@@ -49,11 +49,23 @@ public class AdminController {
     }
 
 
+//    @PostMapping("/projects/{id}/delete")
+//    public String deleteProject(
+//            @PathVariable Long id) {
+//
+//        projectService.deleteUnpaidProject(id);
+//
+//        return "redirect:/admin/projects";
+//    }
+
     @PostMapping("/projects/{id}/delete")
-    public String deleteProject(
-            @PathVariable Long id) {
+    public String deleteProject(@PathVariable Long id) {
+
+        System.out.println("DELETE PROJECT ID = " + id);
 
         projectService.deleteUnpaidProject(id);
+
+        System.out.println("PROJECT DELETED = " + id);
 
         return "redirect:/admin/projects";
     }
@@ -88,4 +100,6 @@ public class AdminController {
 
         return "redirect:/admin/users";
     }
+
+
 }

@@ -12,7 +12,7 @@
           rel="stylesheet">
 
     <link rel="stylesheet"
-          th:href="@{/admin.css}">
+          th:href="@{/css/admin.css}">
 
 </head>
 
@@ -178,6 +178,7 @@
                             Запази
 
                         </button>
+                    </form>
 
                         <div th:if="${project.status.name() == 'NEW' or project.status.name() == 'PENDING_PAYMENT'}" class="mt-4">
 
@@ -194,7 +195,7 @@
 
                         </div>
 
-                    </form>
+
 
                 </div>
 

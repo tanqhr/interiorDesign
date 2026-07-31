@@ -4,6 +4,7 @@ import com.taico.interiorDesign.enums.Role;
 import com.taico.interiorDesign.model.dto.UserRegisterDTO;
 import com.taico.interiorDesign.model.entity.RoleEntity;
 import com.taico.interiorDesign.model.entity.UserEntity;
+import com.taico.interiorDesign.security.CurrentUser;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,6 +13,12 @@ import org.springframework.stereotype.Service;
 import com.taico.interiorDesign.repositories.RoleRepository;
 import com.taico.interiorDesign.repositories.UserRepository;
 import com.taico.interiorDesign.service.UserService;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionInformation;
+
+
+
+
 
 import java.util.List;
 
@@ -21,14 +28,16 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final SessionRegistry sessionRegistry;
 
     public UserServiceImpl(UserRepository userRepository,
                            RoleRepository roleRepository,
-                           PasswordEncoder passwordEncoder) {
+                           PasswordEncoder passwordEncoder, SessionRegistry sessionRegistry) {
 
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.sessionRegistry = sessionRegistry;
     }
 
     @Override
@@ -114,6 +123,34 @@ public class UserServiceImpl implements UserService {
         user.setActive(false);
 
         userRepository.save(user);
+
+
+        List<Object> principals =
+                sessionRegistry.getAllPrincipals();
+
+
+        // 3. Намираме конкретния потребител
+        for (Object principal : principals) {
+
+            if (principal instanceof CurrentUser currentUser) {
+
+                if (currentUser.getId().equals(userId)) {
+
+                    // 4. Намираме активните му сесии
+                    List<SessionInformation> sessions =
+                            sessionRegistry.getAllSessions(
+                                    principal,
+                                    false
+                            );
+
+                    // 5. Прекратяваме ги
+                    for (SessionInformation session : sessions) {
+
+                        session.expireNow();
+                    }
+                }
+            }
+        }
     }
 
     @Override
