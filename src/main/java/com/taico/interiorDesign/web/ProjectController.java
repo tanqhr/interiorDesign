@@ -6,6 +6,7 @@ import com.taico.interiorDesign.model.dto.ProjectCreateDTO;
 import com.taico.interiorDesign.model.entity.DesignFileEntity;
 import com.taico.interiorDesign.model.entity.ProjectEntity;
 import com.taico.interiorDesign.service.ProjectService;
+import com.taico.interiorDesign.service.ServiceSettingService;
 import jakarta.validation.Valid;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.ResponseEntity;
@@ -36,14 +37,16 @@ public class ProjectController {
     private final ProjectRepository projectRepository;
     private final ImageService imageService;
     private final ProjectService projectService;
+    private final ServiceSettingService serviceSettingService;
 
     public ProjectController(FileUploadService fileUploadService,
                              ProjectRepository projectRepository,
-                             ImageService imageService, ProjectService projectService) {
+                             ImageService imageService, ProjectService projectService, ServiceSettingService serviceSettingService) {
         this.fileUploadService = fileUploadService;
         this.projectRepository = projectRepository;
         this.imageService = imageService;
         this.projectService = projectService;
+        this.serviceSettingService = serviceSettingService;
     }
 
 
@@ -68,7 +71,7 @@ public class ProjectController {
 
         model.addAttribute(
                 "serviceTypes",
-                ServiceType.values()
+                serviceSettingService.getActiveServices()
         );
 
 
@@ -108,7 +111,8 @@ public class ProjectController {
         if (bindingResult.hasErrors()) {
 
             model.addAttribute("roomTypes", RoomType.values());
-            model.addAttribute("serviceTypes", ServiceType.values());
+            model.addAttribute("serviceTypes", serviceSettingService.getActiveServices()
+            );
 
             return "project-create";
         }

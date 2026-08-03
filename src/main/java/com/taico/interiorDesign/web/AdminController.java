@@ -1,7 +1,9 @@
 package com.taico.interiorDesign.web;
 
+import com.taico.interiorDesign.enums.ServiceType;
 import com.taico.interiorDesign.model.entity.UserEntity;
 import com.taico.interiorDesign.service.ProjectService;
+import com.taico.interiorDesign.service.ServiceSettingService;
 import com.taico.interiorDesign.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -21,10 +23,12 @@ public class AdminController {
 
     private final UserService userService;
     private final ProjectService projectService;
+    private final ServiceSettingService serviceSettingService;
 
-    public AdminController(UserService userService, ProjectService projectService) {
+    public AdminController(UserService userService, ProjectService projectService, ServiceSettingService serviceSettingService) {
         this.userService = userService;
         this.projectService = projectService;
+        this.serviceSettingService = serviceSettingService;
     }
 
     @GetMapping
@@ -101,5 +105,31 @@ public class AdminController {
         return "redirect:/admin/users";
     }
 
+    @GetMapping("/services")
+    public String services(Model model) {
 
+        model.addAttribute(
+                "services",
+                serviceSettingService.findAll()
+        );
+
+        return "admin/services";
+    }
+
+    @PostMapping("/services/{serviceType}/activate")
+    public String activateService(@PathVariable ServiceType serviceType) {
+
+        serviceSettingService.activate(serviceType);
+
+        return "redirect:/admin/services";
+    }
+
+    @PostMapping("/services/{serviceType}/deactivate")
+    public String deactivateService(
+            @PathVariable ServiceType serviceType) {
+
+        serviceSettingService.deactivate(serviceType);
+
+        return "redirect:/admin/services";
+    }
 }

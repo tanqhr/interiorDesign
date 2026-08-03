@@ -4,11 +4,15 @@ package com.taico.interiorDesign.config;
 import com.taico.interiorDesign.enums.Role;
 import com.taico.interiorDesign.model.entity.RoleEntity;
 import com.taico.interiorDesign.model.entity.UserEntity;
+import com.taico.interiorDesign.repositories.ServiceSettingRepository;
 import com.taico.interiorDesign.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.taico.interiorDesign.repositories.RoleRepository;
+import com.taico.interiorDesign.enums.ServiceType;
+import com.taico.interiorDesign.model.entity.ServiceSettingEntity;
+import com.taico.interiorDesign.repositories.ServiceSettingRepository;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -16,13 +20,15 @@ public class DataInitializer implements CommandLineRunner {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ServiceSettingRepository serviceSettingRepository;
 
     public DataInitializer(RoleRepository roleRepository,
                            UserRepository userRepository,
-                           PasswordEncoder passwordEncoder) {
+                           PasswordEncoder passwordEncoder, ServiceSettingRepository serviceSettingRepository) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.serviceSettingRepository = serviceSettingRepository;
     }
 
     @Override
@@ -32,6 +38,23 @@ public class DataInitializer implements CommandLineRunner {
         for (Role role : Role.values()) {
             roleRepository.findByRole(role)
                     .orElseGet(() -> roleRepository.save(new RoleEntity(role)));
+        }
+
+        // Създаване на услугите
+        for (ServiceType serviceType : ServiceType.values()) {
+
+            serviceSettingRepository
+                    .findByServiceType(serviceType)
+                    .orElseGet(() -> {
+
+                        ServiceSettingEntity serviceSetting =
+                                new ServiceSettingEntity();
+
+                        serviceSetting.setServiceType(serviceType);
+                        serviceSetting.setActive(true);
+
+                        return serviceSettingRepository.save(serviceSetting);
+                    });
         }
 
         // Създаване на администратора
@@ -54,4 +77,6 @@ public class DataInitializer implements CommandLineRunner {
             userRepository.save(admin);
         }
     }
+
+
 }
