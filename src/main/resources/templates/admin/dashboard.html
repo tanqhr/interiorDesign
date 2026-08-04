@@ -221,7 +221,7 @@
 
             <tr th:each="project : ${latestProjects}">
 
-                <td th:text="${project.authorName}">
+                <td th:text="${project.author.getFirstName() + ' ' + project.author.getLastName()}">
                     Иван Иванов
                 </td>
 
@@ -231,10 +231,7 @@
 
                 <td>
 
-                    <span class="badge bg-warning"
-                          th:text="${project.status}">
-                        NEW
-                    </span>
+                    <span class="badge bg-warning" th:text="#{'projectStatus.' + ${project.status}}">Нов</span>
 
                 </td>
 

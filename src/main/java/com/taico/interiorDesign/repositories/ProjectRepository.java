@@ -1,5 +1,6 @@
 package com.taico.interiorDesign.repositories;
 
+import com.taico.interiorDesign.enums.ProjectStatus;
 import com.taico.interiorDesign.model.entity.ProjectEntity;
 import com.taico.interiorDesign.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,10 @@ public interface ProjectRepository extends JpaRepository<ProjectEntity, Long> {
     List<ProjectEntity> findAllByAuthorId(Long authorId);
 
     List<ProjectEntity> findByAuthor(UserEntity author);
+
+    List<ProjectEntity> findTop5ByOrderByCreatedAtDesc();
+
+    long countByStatus(ProjectStatus status);
 
 
 

@@ -5,9 +5,10 @@ public enum ProjectStatus {
     PENDING_PAYMENT,
     PAID,
     IN_PROGRESS,
+    DESIGN_READY,
     WAITING_FOR_CLIENT,
     COMPLETED,
-    CANCELLED,
-    DESIGN_READY
+    CANCELLED
+
 
 }

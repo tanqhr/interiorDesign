@@ -1,7 +1,10 @@
 package com.taico.interiorDesign.web;
 
+import com.taico.interiorDesign.enums.ProjectStatus;
 import com.taico.interiorDesign.enums.ServiceType;
+import com.taico.interiorDesign.model.entity.ProjectEntity;
 import com.taico.interiorDesign.model.entity.UserEntity;
+import com.taico.interiorDesign.repositories.ProjectRepository;
 import com.taico.interiorDesign.service.ProjectService;
 import com.taico.interiorDesign.service.ServiceSettingService;
 import com.taico.interiorDesign.service.UserService;
@@ -14,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
-
+import java.util.List;
 
 
 @Controller
@@ -24,15 +27,57 @@ public class AdminController {
     private final UserService userService;
     private final ProjectService projectService;
     private final ServiceSettingService serviceSettingService;
+    private final ProjectRepository projectRepository;
 
-    public AdminController(UserService userService, ProjectService projectService, ServiceSettingService serviceSettingService) {
+    public AdminController(UserService userService, ProjectService projectService, ServiceSettingService serviceSettingService, ProjectRepository projectRepository) {
         this.userService = userService;
         this.projectService = projectService;
         this.serviceSettingService = serviceSettingService;
+        this.projectRepository = projectRepository;
     }
 
     @GetMapping
-    public String dashboard() {
+    public String dashboard(Model model) {
+
+        List<ProjectEntity> latestProjects = projectRepository.findTop5ByOrderByCreatedAtDesc();
+        model.addAttribute("latestProjects", latestProjects);
+
+//        model.addAttribute(
+//                "newProjects",
+//                projectRepository.countByStatus(ProjectStatus.NEW)
+//        );
+//
+//        model.addAttribute(
+//                "waitingPayment",
+//                projectRepository.countByStatus(ProjectStatus.PENDING_PAYMENT)
+//        );
+//
+//        model.addAttribute(
+//                "inProgress",
+//                projectRepository.countByStatus(ProjectStatus.IN_PROGRESS)
+//        );
+//
+//        model.addAttribute(
+//                "completed",
+//                projectRepository.countByStatus(ProjectStatus.COMPLETED)
+//        );
+
+        long newCount =
+                projectRepository.countByStatus(ProjectStatus.NEW);
+
+        long paymentCount =
+                projectRepository.countByStatus(ProjectStatus.PENDING_PAYMENT);
+
+        long progressCount =
+                projectRepository.countByStatus(ProjectStatus.IN_PROGRESS);
+
+        long completedCount =
+                projectRepository.countByStatus(ProjectStatus.COMPLETED);
+
+        model.addAttribute("newProjects", newCount);
+        model.addAttribute("waitingPayment", paymentCount);
+        model.addAttribute("inProgress", progressCount);
+        model.addAttribute("completed", completedCount);
         return "admin/dashboard";
     }
 
