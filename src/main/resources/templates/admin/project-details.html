@@ -146,6 +146,10 @@
                                     class="form-select"
                                     name="status">
 
+                                <option value="">
+                                    Изберете статус
+                                </option>
+
                                 <option
                                         th:each="status : ${statuses}"
                                         th:value="${status}"
@@ -169,6 +173,27 @@
                                     name="adminNote"
                                     th:text="${project.adminNote}">
                             </textarea>
+
+                        </div>
+
+                        <!-- Корекции от клиента -->
+
+                        <div class="mb-4"
+                             th:if="${project.clientFeedback != null and !project.clientFeedback.isEmpty()}">
+
+                            <label class="form-label fw-bold">
+                                Корекции от клиента
+                            </label>
+
+                            <div class="alert alert-warning">
+
+                                <i class="bi bi-chat-left-text me-2"></i>
+
+                                <span th:text="${project.clientFeedback}">
+            Тук ще се покаже желаната промяна от клиента.
+        </span>
+
+                            </div>
 
                         </div>
 

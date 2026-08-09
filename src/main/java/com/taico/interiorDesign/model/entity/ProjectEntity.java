@@ -51,6 +51,9 @@ import java.util.List;
         @Column(columnDefinition = "TEXT")
         private String adminNote;
 
+        @Column(columnDefinition = "TEXT")
+        private String clientFeedback;
+
         @Enumerated(EnumType.STRING)
         @Column(nullable = false)
         private ServiceType serviceType;

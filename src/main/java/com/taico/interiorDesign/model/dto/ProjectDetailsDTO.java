@@ -53,6 +53,8 @@ public class ProjectDetailsDTO {
 
     private String adminNote;
 
+    private String clientFeedback;
+
     private BigDecimal price;
 
     private ProjectStatus status;

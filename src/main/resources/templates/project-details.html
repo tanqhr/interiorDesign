@@ -337,6 +337,66 @@
 
         </div>
 
+        <!-- КОРЕКЦИИ ОТ КЛИЕНТА -->
+
+        <div class="feedback-section"
+             th:if="${project.status.name() == 'WAITING_FOR_CLIENT'}">
+
+            <div class="feedback-heading">
+
+                <span>ОБРАТНА ВРЪЗКА</span>
+
+                <h3>
+                    Какво мислите за проекта?
+                </h3>
+
+                <p>
+                    Ако проектът Ви харесва, можете да го приемете.
+                    Ако желаете промени, опишете ги по-долу.
+                </p>
+
+            </div>
+
+
+            <!-- ПРИЕМАМ ПРОЕКТА -->
+
+            <form th:action="@{/projects/{id}/approve(id=${project.id})}"
+                  method="post"
+                  class="mb-3">
+
+                <button type="submit"
+                        class="approve-btn">
+
+                    ✓ Приемам проекта
+
+                </button>
+
+            </form>
+
+
+            <!-- ИСКАМ КОРЕКЦИИ -->
+
+            <form th:action="@{/projects/{id}/feedback(id=${project.id})}"
+                  method="post">
+
+        <textarea class="feedback-textarea"
+                  name="feedback"
+                  rows="5"
+                  required
+                  placeholder="Например: Искам диванът да бъде в по-светъл цвят и да сменим осветлението..."></textarea>
+
+                <button type="submit"
+                        class="feedback-btn">
+
+                    <span>✎</span>
+                    Искам корекции
+
+                </button>
+
+            </form>
+
+        </div>
+
     </section>
 
 

@@ -105,53 +105,44 @@
                     <h4 th:text="${project.title}">
                         Име на проект
                     </h4>
-
+                    <div class="project-actions">
                     <a th:href="@{/projects/{id}(id=${project.id})}"
-                       class="btn btn-dark">
+                       class="status-btn open-btn me-5">
                         Отвори
                     </a>
 
                     <a th:if="${project.price != null
-                   and project.status.name() == 'PENDING_PAYMENT'}"
-
+        and project.status.name() == 'PENDING_PAYMENT'}"
                        th:href="@{/payment/{id}(id=${project.id})}"
-
-                       class="btn gold-btn ms-2">
+                       class="status-btn payment-btn">
 
                         Плати
 
                     </a>
 
                     <span th:if="${project.status.name() == 'PAID'}"
-                          class="badge bg-success p-2">
+                          class="status-btn paid-btn">
 
-            Платено — очаква се качване
+    Платено
 
-        </span>
+</span>
 
+                    <span th:if="${project.status.name() == 'IN_PROGRESS'}"
+                          class="status-btn progress-btn">
 
-                    <!-- ДИЗАЙНЪТ СЕ ИЗРАБОТВА -->
+    Изработва се
 
-                    <span th:if="${project.status.name() == 'DESIGN_IN_PROGRESS'}"
-                          class="badge bg-warning text-dark p-2">
+</span>
 
-            Дизайнът се изработва
-
-        </span>
-
-
-                    <!-- ГОТОВ ДИЗАЙН -->
-
-                    <a th:if="${project.status.name() == 'DESIGN_READY'}"
-
+                    <a th:if="${project.status.name() == 'WAITING_FOR_CLIENT'}"
                        th:href="@{/projects/{id}(id=${project.id})}"
-
-                       class="btn btn-success">
+                       class="status-btn ready-btn">
 
                         Виж дизайна
 
                     </a>
 
+ </div>
 
                 </div>
 

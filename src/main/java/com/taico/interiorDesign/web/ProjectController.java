@@ -142,6 +142,31 @@ public class ProjectController {
         return "project-details";
     }
 
+    @PostMapping("/{id}/feedback")
+    public String sendFeedback(
+            @PathVariable Long id,
+            @RequestParam String feedback,
+            Authentication authentication) {
+
+        projectService.sendFeedback(
+                id,
+                feedback,
+                authentication);
+
+        return "redirect:/projects/" + id;
+    }
+
+    @PostMapping("/{id}/approve")
+    public String approveProject(
+            @PathVariable Long id,
+            Authentication authentication) {
+
+        projectService.approveProject(id, authentication);
+
+        return "redirect:/projects/" + id;
+    }
+
+
 
 
     @GetMapping("/{projectId}/designs/{fileId}")
@@ -298,5 +323,6 @@ public class ProjectController {
             );
         }
     }
+
 
 }

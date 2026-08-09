@@ -63,3 +63,116 @@ body {
     object-fit:cover;
 
 }
+
+/* ===========================
+   Общ стил за статусите
+=========================== */
+
+.status-btn {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .3s ease;
+    border: 1px solid transparent;
+}
+
+/* ===========================
+   Очаква плащане
+=========================== */
+
+.payment-btn {
+    background: #b68b3f;
+    color: white;
+}
+
+.payment-btn:hover {
+    background: #9d7430;
+    color: white;
+}
+
+/* ===========================
+   Платено
+=========================== */
+
+.paid-btn {
+    background: #1f7a4c;
+    color: white;
+}
+
+/* ===========================
+   Дизайнът се изработва
+=========================== */
+
+.progress-btn {
+    background: #212529;
+    color: #d4af37;
+    border-color: #d4af37;
+}
+
+/* ===========================
+   Дизайнът е готов
+=========================== */
+
+.ready-btn {
+    background: #d4af37;
+    color: #212529;
+}
+
+.ready-btn:hover {
+    background: #bf9b2f;
+    color: #212529;
+}
+
+/* ===========================
+   Очаква клиента
+=========================== */
+
+.client-btn {
+    background: #0d6efd;
+    color: white;
+}
+
+/* ===========================
+   Завършен
+=========================== */
+
+.completed-btn {
+    background: #198754;
+    color: white;
+}
+
+/* ===========================
+   Отказан
+=========================== */
+
+.cancelled-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.open-btn {
+    background: #212529;
+    color: white;
+    border: 1px solid #212529;
+
+}
+
+.open-btn:hover {
+    background: #343a40;
+    color: white;
+    border-color: #343a40;
+}
+
+.project-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-btn {
+    min-width: 150px;
+    text-align: center;
+}

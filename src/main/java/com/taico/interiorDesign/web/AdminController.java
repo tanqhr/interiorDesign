@@ -2,12 +2,18 @@ package com.taico.interiorDesign.web;
 
 import com.taico.interiorDesign.enums.ProjectStatus;
 import com.taico.interiorDesign.enums.ServiceType;
+import com.taico.interiorDesign.model.entity.DesignFileEntity;
 import com.taico.interiorDesign.model.entity.ProjectEntity;
 import com.taico.interiorDesign.model.entity.UserEntity;
+import com.taico.interiorDesign.repositories.DesignFileRepository;
 import com.taico.interiorDesign.repositories.ProjectRepository;
 import com.taico.interiorDesign.service.ProjectService;
 import com.taico.interiorDesign.service.ServiceSettingService;
 import com.taico.interiorDesign.service.UserService;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.List;
 
@@ -28,12 +39,14 @@ public class AdminController {
     private final ProjectService projectService;
     private final ServiceSettingService serviceSettingService;
     private final ProjectRepository projectRepository;
+    private final DesignFileRepository designFileRepository;
 
-    public AdminController(UserService userService, ProjectService projectService, ServiceSettingService serviceSettingService, ProjectRepository projectRepository) {
+    public AdminController(UserService userService, ProjectService projectService, ServiceSettingService serviceSettingService, ProjectRepository projectRepository, DesignFileRepository designFileRepository) {
         this.userService = userService;
         this.projectService = projectService;
         this.serviceSettingService = serviceSettingService;
         this.projectRepository = projectRepository;
+        this.designFileRepository = designFileRepository;
     }
 
     @GetMapping
@@ -176,5 +189,28 @@ public class AdminController {
         serviceSettingService.deactivate(serviceType);
 
         return "redirect:/admin/services";
+    }
+
+
+
+    @GetMapping("/designs/{id}/download")
+    public ResponseEntity<Resource> downloadDesign(
+            @PathVariable Long id) throws MalformedURLException {
+
+        DesignFileEntity design = designFileRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Дизайнът не е намерен."));
+
+        Path path = Paths.get(design.getFilePath());
+
+        Resource resource = new UrlResource(path.toUri());
+
+        if (!resource.exists()) {
+            throw new RuntimeException("Файлът не е намерен.");
+        }
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + path.getFileName() + "\"")
+                .body(resource);
     }
 }

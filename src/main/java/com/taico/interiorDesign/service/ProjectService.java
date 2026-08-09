@@ -41,4 +41,8 @@ public interface ProjectService {
     ProjectEntity findByIdForUser(Long projectId, Authentication authentication);
 
     void deleteUnpaidProject(Long projectId);
+
+    void sendFeedback(Long id, String feedback, Authentication authentication);
+
+    void approveProject(Long projectId, Authentication authentication);
 }

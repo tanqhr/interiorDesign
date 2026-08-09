@@ -22,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import java.io.IOException;
@@ -243,7 +244,15 @@ public
 
         project.setPrice(dto.getPrice());
 
-        project.setStatus(dto.getStatus());
+        if (project.getStatus() == ProjectStatus.NEW
+                && dto.getPrice() != null) {
+
+            project.setStatus(ProjectStatus.PENDING_PAYMENT);
+
+        } else {
+
+            project.setStatus(dto.getStatus());
+        }
 
         project.setAdminNote(dto.getAdminNote());
 
@@ -280,6 +289,7 @@ public
 
         dto.setStatus(project.getStatus());
         dto.setAdminNote(project.getAdminNote());
+        dto.setClientFeedback(project.getClientFeedback());
 
         dto.setCreatedAt(project.getCreatedAt());
         dto.setUpdatedAt(project.getUpdatedAt());
@@ -409,6 +419,124 @@ public ProjectEntity findById(Long id) {
     }
 
 
+//    @Override
+//    @Transactional
+//    public void uploadDesignFile(
+//            Long projectId,
+//            MultipartFile file,
+//            Authentication authentication
+//    ) {
+//
+//        if (file == null || file.isEmpty()) {
+//            throw new IllegalArgumentException(
+//                    "Моля, изберете файл."
+//            );
+//        }
+//
+//        CurrentUser currentUser =
+//                (CurrentUser) authentication.getPrincipal();
+//
+//        UserEntity admin =
+//                userRepository.findById(currentUser.getId())
+//                        .orElseThrow(() ->
+//                                new RuntimeException(
+//                                        "Администраторът не е намерен."
+//                                )
+//                        );
+//
+//        ProjectEntity project =
+//                projectRepository.findById(projectId)
+//                        .orElseThrow(() ->
+//                                new RuntimeException(
+//                                        "Проектът не е намерен."
+//                                )
+//                        );
+//
+//        try {
+//
+//            String uploadDir =
+//                    "uploads/designs/";
+//
+//            Path directory =
+//                    Paths.get(uploadDir);
+//
+//            Files.createDirectories(directory);
+//
+//            String originalFileName =
+//                    file.getOriginalFilename();
+//
+//            String extension = "";
+//
+//            if (originalFileName != null
+//                    && originalFileName.contains(".")) {
+//
+//                extension = originalFileName
+//                        .substring(
+//                                originalFileName.lastIndexOf(".")
+//                        );
+//            }
+//
+//            String storedFileName =
+//                    UUID.randomUUID() + extension;
+//
+//            Path filePath =
+//                    directory.resolve(storedFileName);
+//
+//            Files.copy(
+//                    file.getInputStream(),
+//                    filePath,
+//                    StandardCopyOption.REPLACE_EXISTING
+//            );
+//
+//
+//            DesignFileEntity designFile =
+//                    new DesignFileEntity();
+//
+//            designFile.setFileName(
+//                    originalFileName
+//            );
+//
+//            designFile.setFilePath(
+//                    filePath.toString()
+//            );
+//
+//            designFile.setContentType(
+//                    file.getContentType()
+//            );
+//
+//            designFile.setFileSize(
+//                    file.getSize()
+//            );
+//
+//            designFile.setProject(
+//                    project
+//            );
+//
+//            designFile.setUploadedBy(
+//                    admin
+//            );
+//
+//
+//            designFileRepository.save(
+//                    designFile
+//            );
+//
+//
+//            project.setStatus(
+//                    ProjectStatus.WAITING_FOR_CLIENT
+//            );
+//
+//            projectRepository.save(project);
+//
+//
+//        } catch (IOException e) {
+//
+//            throw new RuntimeException(
+//                    "Грешка при качването на файла.", e);
+//        }
+//    }
+
+
     @Override
     @Transactional
     public void uploadDesignFile(
@@ -444,11 +572,9 @@ public ProjectEntity findById(Long id) {
 
         try {
 
-            String uploadDir =
-                    "uploads/designs/";
+            String uploadDir = "uploads/designs/";
 
-            Path directory =
-                    Paths.get(uploadDir);
+            Path directory = Paths.get(uploadDir);
 
             Files.createDirectories(directory);
 
@@ -460,10 +586,9 @@ public ProjectEntity findById(Long id) {
             if (originalFileName != null
                     && originalFileName.contains(".")) {
 
-                extension = originalFileName
-                        .substring(
-                                originalFileName.lastIndexOf(".")
-                        );
+                extension = originalFileName.substring(
+                        originalFileName.lastIndexOf(".")
+                );
             }
 
             String storedFileName =
@@ -479,32 +604,72 @@ public ProjectEntity findById(Long id) {
             );
 
 
-            DesignFileEntity designFile =
-                    new DesignFileEntity();
+            // Проверяваме дали проектът вече има дизайн
 
-            designFile.setFileName(
-                    originalFileName
-            );
+            Optional<DesignFileEntity> existingDesign =
+                    designFileRepository.findByProjectId(projectId);
 
-            designFile.setFilePath(
-                    filePath.toString()
-            );
 
-            designFile.setContentType(
-                    file.getContentType()
-            );
+            DesignFileEntity designFile;
 
-            designFile.setFileSize(
-                    file.getSize()
-            );
 
-            designFile.setProject(
-                    project
-            );
+            if (existingDesign.isPresent()) {
 
-            designFile.setUploadedBy(
-                    admin
-            );
+                // ИМА стар дизайн → обновяваме го
+
+                designFile = existingDesign.get();
+
+                designFile.setFileName(
+                        originalFileName
+                );
+
+                designFile.setFilePath(
+                        filePath.toString()
+                );
+
+                designFile.setContentType(
+                        file.getContentType()
+                );
+
+                designFile.setFileSize(
+                        file.getSize()
+                );
+
+                designFile.setUploadedBy(
+                        admin
+                );
+
+            } else {
+
+                // НЯМА дизайн → създаваме нов
+
+                designFile =
+                        new DesignFileEntity();
+
+                designFile.setFileName(
+                        originalFileName
+                );
+
+                designFile.setFilePath(
+                        filePath.toString()
+                );
+
+                designFile.setContentType(
+                        file.getContentType()
+                );
+
+                designFile.setFileSize(
+                        file.getSize()
+                );
+
+                designFile.setProject(
+                        project
+                );
+
+                designFile.setUploadedBy(
+                        admin
+                );
+            }
 
 
             designFileRepository.save(
@@ -512,9 +677,17 @@ public ProjectEntity findById(Long id) {
             );
 
 
+            // След успешно качване
+            // чакаме клиента
+
             project.setStatus(
-                    ProjectStatus.DESIGN_READY
+                    ProjectStatus.WAITING_FOR_CLIENT
             );
+
+            // Изчистваме старите корекции,
+            // защото вече има нов дизайн
+
+            project.setClientFeedback(null);
 
             projectRepository.save(project);
 
@@ -522,10 +695,11 @@ public ProjectEntity findById(Long id) {
         } catch (IOException e) {
 
             throw new RuntimeException(
-                    "Грешка при качването на файла.", e);
+                    "Грешка при качването на файла.",
+                    e
+            );
         }
     }
-
 
     @Override
     public ProjectEntity findByIdForUser(
@@ -572,6 +746,44 @@ public ProjectEntity findById(Long id) {
         }
 
         projectRepository.delete(project);
+    }
+
+    @Transactional
+    public void sendFeedback(
+            Long projectId,
+            String feedback,
+            Authentication authentication) {
+
+        ProjectEntity project =
+                projectRepository.findById(projectId)
+                        .orElseThrow();
+
+        project.setClientFeedback(feedback);
+
+        project.setStatus(
+                ProjectStatus.IN_PROGRESS
+        );
+
+        projectRepository.save(project);
+    }
+
+    @Override
+    @Transactional
+    public void approveProject(
+            Long projectId,
+            Authentication authentication) {
+
+        ProjectEntity project =
+                projectRepository.findById(projectId)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Проектът не е намерен."
+                                )
+                        );
+
+        project.setStatus(ProjectStatus.COMPLETED);
+
+        projectRepository.save(project);
     }
 
 }
