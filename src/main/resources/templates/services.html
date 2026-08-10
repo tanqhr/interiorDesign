@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="bg"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 
 <head>
 
@@ -25,15 +27,64 @@
 
     <div class="container">
 
-        <a class="navbar-brand"
-           th:href="@{/}">
+        <a class="navbar-brand" href="/">
             TA&CO
         </a>
 
-        <a class="btn btn-outline-light"
-           th:href="@{/projects/create}">
-            Нов проект
-        </a>
+        <button class="navbar-toggler"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav me-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Начало</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/services">Услуги</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Галерия</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/prices">Цени</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">За нас</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Контакти</a>
+                </li>
+
+            </ul>
+            <div sec:authorize="isAnonymous()">
+                <a th:href="@{/users/login}" class="btn btn-outline-light me-2">
+                    Вход
+                </a>
+
+                <a th:href="@{/users/register}" class="btn gold-btn">
+                    Регистрация
+                </a>
+            </div>
+            <div sec:authorize="isAuthenticated()" class="user-menu">
+
+                <a th:href="@{/home}" class="projects-btn">
+                    Моите проекти
+                </a>
+
+            </div>
+        </div>
 
     </div>
 

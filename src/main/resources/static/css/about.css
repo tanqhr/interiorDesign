@@ -1,0 +1,485 @@
+body {
+    background: #faf9f5;
+    color: #212529;
+}
+
+
+/* =====================================
+   HERO
+===================================== */
+
+.about-hero {
+    padding: 100px 0;
+
+    background: #ffffff;
+}
+
+.about-hero-content {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 70px;
+
+    align-items: center;
+}
+
+.about-label {
+    display: block;
+
+    margin-bottom: 15px;
+
+    color: #b8943f;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2.5px;
+}
+
+.about-hero h1 {
+    margin-bottom: 25px;
+
+    font-size: 56px;
+    font-weight: 600;
+
+    line-height: 1.12;
+}
+
+.about-hero-text p {
+    max-width: 600px;
+
+    color: #6c757d;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+}
+
+
+/* =====================================
+   HERO VISUAL
+===================================== */
+
+.about-hero-visual {
+    display: flex;
+
+    justify-content: center;
+}
+
+.about-visual-box {
+    width: 430px;
+    height: 430px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+            linear-gradient(
+                    145deg,
+                    #e9e3d5,
+                    #c9b98e
+            );
+
+    border-radius: 30px;
+
+    box-shadow:
+            0 25px 50px rgba(0, 0, 0, 0.12);
+
+    text-align: center;
+}
+
+.about-visual-box span {
+    font-size: 48px;
+    font-weight: 700;
+
+    letter-spacing: 4px;
+}
+
+.about-visual-box strong {
+    margin-top: 10px;
+
+    font-size: 15px;
+
+    letter-spacing: 5px;
+}
+
+.about-visual-box small {
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+}
+
+
+/* =====================================
+   WHO WE ARE
+===================================== */
+
+.about-section {
+    padding: 100px 0;
+}
+
+.about-two-columns {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 100px;
+
+    align-items: start;
+}
+
+.about-two-columns h2 {
+    max-width: 500px;
+
+    font-size: 40px;
+    font-weight: 600;
+
+    line-height: 1.2;
+}
+
+.about-text {
+    color: #6c757d;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+.about-text p {
+    margin-bottom: 25px;
+}
+
+
+/* =====================================
+   APPROACH
+===================================== */
+
+.approach-section {
+    padding: 100px 0;
+
+    background: #ffffff;
+}
+
+.section-heading {
+    max-width: 750px;
+
+    margin: 0 auto 55px;
+
+    text-align: center;
+}
+
+.section-heading span {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #b8943f;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.section-heading h2 {
+    margin-bottom: 15px;
+
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.section-heading p {
+    margin: 0;
+
+    color: #6c757d;
+
+    line-height: 1.7;
+}
+
+.approach-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 22px;
+}
+
+.approach-card {
+    position: relative;
+
+    padding: 35px 25px;
+
+    background: #faf9f5;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease;
+}
+
+.approach-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+            0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.approach-number {
+    position: absolute;
+
+    top: 15px;
+    right: 18px;
+
+    color: #d2bd83;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.approach-icon {
+    margin-bottom: 18px;
+
+    font-size: 35px;
+}
+
+.approach-card h3 {
+    margin-bottom: 12px;
+
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.approach-card p {
+    margin: 0;
+
+    color: #6c757d;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================
+   WHY TA&CO
+===================================== */
+
+.why-section {
+    padding: 100px 0;
+}
+
+.why-content {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 100px;
+}
+
+.why-title h2 {
+    max-width: 500px;
+
+    font-size: 40px;
+    font-weight: 600;
+
+    line-height: 1.2;
+}
+
+.why-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+}
+
+.why-item {
+    display: flex;
+
+    gap: 20px;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #e6e2d8;
+}
+
+.why-item > span {
+    flex-shrink: 0;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #c5a45a;
+
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    font-weight: 700;
+}
+
+.why-item h3 {
+    margin-bottom: 6px;
+
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.why-item p {
+    margin: 0;
+
+    color: #6c757d;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================
+   CTA
+===================================== */
+
+.about-cta {
+    padding: 100px 20px;
+
+    background: #212529;
+
+    color: #ffffff;
+
+    text-align: center;
+}
+
+.about-cta .container {
+    max-width: 700px;
+}
+
+.about-cta span {
+    display: block;
+
+    margin-bottom: 15px;
+
+    color: #d2bd83;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.about-cta h2 {
+    margin-bottom: 15px;
+
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.about-cta p {
+    margin-bottom: 30px;
+
+    color: #ced4da;
+
+    line-height: 1.7;
+}
+
+.about-cta-btn {
+    display: inline-block;
+
+    padding: 13px 30px;
+
+    background: #c5a45a;
+
+    color: #212529;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.25s ease;
+}
+
+.about-cta-btn:hover {
+    background: #d5b86f;
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media (max-width: 992px) {
+
+    .about-hero-content,
+    .about-two-columns,
+    .why-content {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+    }
+
+    .about-hero h1 {
+        font-size: 45px;
+    }
+
+    .about-hero-visual {
+        order: -1;
+    }
+
+    .approach-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .about-hero {
+        padding: 70px 20px;
+    }
+
+    .about-hero h1 {
+        font-size: 36px;
+    }
+
+    .about-visual-box {
+        width: 300px;
+        height: 300px;
+    }
+
+    .about-visual-box span {
+        font-size: 36px;
+    }
+
+    .approach-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-section,
+    .approach-section,
+    .why-section {
+        padding: 70px 20px;
+    }
+
+}
