@@ -47,6 +47,7 @@ public class SecurityConfig {
                                 "/prices",
                                 "/about",
                                 "/contact",
+                                "/gallery",
                                 "/css/**",
                                 "/js/**",
                                 "/images/**"
