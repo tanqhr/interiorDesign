@@ -7,9 +7,8 @@ spring:
   mail:
       host: smtp.abv.bg
       port: 465
-      username: mail_000@abv.bg
-      password: Mail_000@012
-
+      username: ${EMAIL_USERNAME}
+      password: ${EMAIL_PASSWORD}
       properties:
         mail:
           smtp:
