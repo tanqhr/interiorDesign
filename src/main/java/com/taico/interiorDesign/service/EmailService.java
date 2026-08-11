@@ -9,4 +9,10 @@ public interface EmailService {
             String subject,
             String message
     );
+
+
+    void sendRegistrationEmail(
+            String email,
+            String name
+    );
 }

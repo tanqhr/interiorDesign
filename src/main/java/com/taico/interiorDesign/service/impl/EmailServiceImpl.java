@@ -59,4 +59,49 @@ public class EmailServiceImpl implements EmailService {
             );
         }
     }
+
+
+    @Override
+    public void sendRegistrationEmail(
+            String email,
+            String name
+    ) {
+//        System.out.println(
+//                ">>> Изпращам регистрационен имейл към: " + email
+//        );
+      try {
+
+            MimeMessage mail =
+                    mailSender.createMimeMessage();
+
+            MimeMessageHelper helper =
+                    new MimeMessageHelper(mail, false, "UTF-8");
+
+            helper.setFrom("mail_000@abv.bg");
+            helper.setTo(email);
+
+            helper.setSubject(
+                    "Добре дошли в TA&CO!"
+            );
+
+            helper.setText(
+                    "Здравейте, " + name + "!\n\n" +
+                            "Благодарим Ви, че се регистрирахте в TA&CO.\n\n" +
+                            "Вашият профил беше създаден успешно.\n\n" +
+                            "Очакваме с удоволствие да работим заедно " +
+                            "по Вашия интериорен проект.\n\n" +
+                            "Поздрави,\n" +
+                            "Екипът на TA&CO"
+            );
+
+            mailSender.send(mail);
+
+        } catch (MessagingException e) {
+
+            throw new RuntimeException(
+                    "Грешка при изпращането на регистрационния имейл.",
+                    e
+            );
+        }
+    }
 }

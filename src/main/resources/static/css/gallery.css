@@ -76,10 +76,6 @@
 }
 
 
-.gallery-card:hover .gallery-overlay {
-    transform: translateY(0);
-}
-
 
 .gallery-overlay span {
     font-size: 12px;
