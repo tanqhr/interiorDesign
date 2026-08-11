@@ -4,6 +4,19 @@ spring:
     username: root
     password: 12345
 
+  mail:
+      host: smtp.abv.bg
+      port: 465
+      username: mail_000@abv.bg
+      password: Mail_000@012
+
+      properties:
+        mail:
+          smtp:
+            auth: true
+            ssl:
+              enable: true
+
   jpa:
     hibernate:
       ddl-auto: update

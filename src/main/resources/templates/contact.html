@@ -257,7 +257,22 @@
                 </h2>
 
 
-                <form>
+                <!-- СЪОБЩЕНИЕ ЗА УСПЕШНО ИЗПРАЩАНЕ -->
+
+                <div th:if="${param.success}"
+                     class="alert alert-success">
+
+                    Съобщението беше изпратено успешно!
+
+                </div>
+
+
+                <form th:action="@{/contact}" method="post">
+
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}">
+
 
                     <div class="form-group">
 
@@ -267,7 +282,9 @@
 
                         <input type="text"
                                class="form-control"
-                               placeholder="Вашето име">
+                               name="name"
+                               placeholder="Вашето име"
+                               required>
 
                     </div>
 
@@ -280,7 +297,9 @@
 
                         <input type="email"
                                class="form-control"
-                               placeholder="Вашият имейл">
+                               name="email"
+                               placeholder="Вашият имейл"
+                               required>
 
                     </div>
 
@@ -293,7 +312,9 @@
 
                         <input type="text"
                                class="form-control"
-                               placeholder="За какво искате да се свържете с нас?">
+                               name="subject"
+                               placeholder="За какво искате да се свържете с нас?"
+                               required>
 
                     </div>
 
@@ -305,8 +326,10 @@
                         </label>
 
                         <textarea class="form-control"
+                                  name="message"
                                   rows="6"
-                                  placeholder="Напишете вашето съобщение..."></textarea>
+                                  placeholder="Напишете вашето съобщение..."
+                                  required></textarea>
 
                     </div>
 
@@ -319,7 +342,6 @@
                     </button>
 
                 </form>
-
             </div>
 
         </div>
