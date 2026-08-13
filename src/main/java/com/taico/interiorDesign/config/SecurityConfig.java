@@ -48,6 +48,8 @@ public class SecurityConfig {
                                 "/about",
                                 "/contact",
                                 "/gallery",
+                                "/faq",
+                                "/api/faqs",
                                 "/css/**",
                                 "/js/**",
                                 "/images/**"
