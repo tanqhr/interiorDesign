@@ -12,5 +12,6 @@ public class FaqDTO {
     private String question;
     private String answer;
     private String category;
+    private boolean isActive;
 
 }

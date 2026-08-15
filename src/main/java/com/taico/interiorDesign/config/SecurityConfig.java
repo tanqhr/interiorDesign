@@ -34,6 +34,9 @@ public class SecurityConfig {
             HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/api/**")
+                )
                 .authorizeHttpRequests(auth -> auth
 
                         .requestMatchers(HttpMethod.POST, "/contact")
@@ -54,6 +57,30 @@ public class SecurityConfig {
                                 "/js/**",
                                 "/images/**"
                         ).permitAll()
+
+
+                                .requestMatchers(HttpMethod.GET, "/api/faqs")
+                                .permitAll()
+
+
+                                .requestMatchers(HttpMethod.GET, "/api/faqs/all")
+                                .hasAuthority("ADMIN")
+
+                                .requestMatchers(HttpMethod.POST, "/api/faqs")
+                                .hasAuthority("ADMIN")
+
+                                .requestMatchers(HttpMethod.PUT, "/api/faqs/**")
+                                .hasAuthority("ADMIN")
+
+                                .requestMatchers(HttpMethod.PATCH, "/api/faqs/**")
+                                .hasAuthority("ADMIN")
+
+                                .requestMatchers(HttpMethod.DELETE, "/api/faqs/**")
+                                .hasAuthority("ADMIN")
+
+
+                                .requestMatchers("/admin/**")
+                                .hasAuthority("ADMIN")
 
                         .requestMatchers("/admin/**")
                         .hasAuthority("ADMIN")

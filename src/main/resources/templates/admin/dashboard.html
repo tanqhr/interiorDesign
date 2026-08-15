@@ -132,7 +132,8 @@
 
     <div class="row g-4 mt-5">
 
-        <div class="col-lg-4">
+        <!-- Проекти -->
+        <div class="col-lg-3 col-md-6">
 
             <a th:href="@{/admin/projects}"
                class="dashboard-card">
@@ -151,7 +152,9 @@
 
         </div>
 
-        <div class="col-lg-4">
+
+        <!-- Услуги -->
+        <div class="col-lg-3 col-md-6">
 
             <a th:href="@{/admin/services}"
                class="dashboard-card">
@@ -170,7 +173,9 @@
 
         </div>
 
-        <div class="col-lg-4">
+
+        <!-- Потребители -->
+        <div class="col-lg-3 col-md-6">
 
             <a th:href="@{/admin/users}"
                class="dashboard-card">
@@ -183,6 +188,27 @@
 
                 <p>
                     Управление на клиентските акаунти.
+                </p>
+
+            </a>
+
+        </div>
+
+
+        <!-- FAQ -->
+        <div class="col-lg-3 col-md-6">
+
+            <a th:href="@{/admin/faqs}"
+               class="dashboard-card">
+
+                <i class="bi bi-question-circle-fill"></i>
+
+                <h4>
+                    ЧЗВ
+                </h4>
+
+                <p>
+                    Добавяне и управление на често задавани въпроси.
                 </p>
 
             </a>

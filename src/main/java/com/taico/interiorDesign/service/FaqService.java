@@ -7,4 +7,14 @@ import java.util.List;
 public interface FaqService {
 
     List<FaqDTO> getActiveFaqs();
+
+    List<FaqDTO> getAllFaqs();
+
+    FaqDTO createFaq(FaqDTO dto);
+
+    FaqDTO updateFaq(Long id, FaqDTO dto);
+
+    FaqDTO toggleActive(Long id);
+
+    void deleteFaq(Long id);
 }
