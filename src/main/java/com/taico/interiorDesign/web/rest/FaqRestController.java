@@ -2,6 +2,7 @@ package com.taico.interiorDesign.web.rest;
 
 import com.taico.interiorDesign.model.dto.FaqDTO;
 import com.taico.interiorDesign.service.FaqService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class FaqRestController {
     }
 
     @PostMapping
-    public FaqDTO createFaq(@RequestBody FaqDTO dto) {
+    public FaqDTO createFaq(@Valid @RequestBody FaqDTO dto) {
         return faqService.createFaq(dto);
     }
 
@@ -49,4 +50,6 @@ public class FaqRestController {
     public void deleteFaq(@PathVariable Long id) {
         faqService.deleteFaq(id);
     }
+
+
 }

@@ -151,3 +151,22 @@ footer{
     box-shadow: 0 12px 25px rgba(184, 144, 79, 0.35);
 
 }
+
+.weather-widget {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    margin-right: 3em;
+}
+
+.weather-widget span,
+.weather-widget strong {
+    color: #fff;
+}
+
+.weather-widget strong {
+    font-size: 16px;
+    font-weight: 600;
+}

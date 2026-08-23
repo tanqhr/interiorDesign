@@ -1,5 +1,6 @@
 package com.taico.interiorDesign.service.impl;
 
+import com.taico.interiorDesign.exception.ResourceNotFoundException;
 import com.taico.interiorDesign.model.dto.FaqDTO;
 import com.taico.interiorDesign.model.entity.FaqEntity;
 import com.taico.interiorDesign.repositories.FaqRepository;
@@ -60,7 +61,7 @@ public class FaqServiceImpl implements FaqService {
     public FaqDTO updateFaq(Long id, FaqDTO dto) {
 
         FaqEntity faq = faqRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("FAQ not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("FAQ not found with id: " + id));
 
         faq.setQuestion(dto.getQuestion());
         faq.setAnswer(dto.getAnswer());
@@ -77,7 +78,7 @@ public class FaqServiceImpl implements FaqService {
     public FaqDTO toggleActive(Long id) {
 
         FaqEntity faq = faqRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("FAQ not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("FAQ not found with id: " + id));
 
         faq.setActive(!faq.isActive());
 
@@ -91,7 +92,7 @@ public class FaqServiceImpl implements FaqService {
     public void deleteFaq(Long id) {
 
         if (!faqRepository.existsById(id)) {
-            throw new RuntimeException("FAQ not found with id: " + id);
+            throw new  ResourceNotFoundException("FAQ not found with id: " + id);
         }
 
         faqRepository.deleteById(id);
@@ -110,5 +111,7 @@ public class FaqServiceImpl implements FaqService {
 
         return dto;
     }
+
+
 }
 

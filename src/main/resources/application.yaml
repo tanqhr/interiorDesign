@@ -3,7 +3,12 @@ spring:
     url: jdbc:mysql://localhost:3306/interior_design?useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_unicode_ci
     username: root
     password: 12345
-
+  cache:
+    type: caffeine
+    cache-names:
+      - cityNames
+    caffeine:
+      spec: maximumSize=100,expireAfterWrite=24h
   mail:
       host: smtp.abv.bg
       port: 465
@@ -30,3 +35,11 @@ spring:
 
 app:
     upload-dir: uploads
+
+weather:
+    service:
+      mocked: false
+      api-key: ${WEATHER_API_KEY}
+      api-url: ${WEATHER_API_URL}
+
+

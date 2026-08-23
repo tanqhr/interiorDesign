@@ -41,7 +41,7 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.POST, "/contact")
                         .permitAll()
-
+                        .requestMatchers("/api/weather/**").permitAll()
                         .requestMatchers(
                                 "/",
                                 "/users/register",
@@ -53,6 +53,7 @@ public class SecurityConfig {
                                 "/gallery",
                                 "/faq",
                                 "/api/faqs",
+                                "/api/weather",
                                 "/css/**",
                                 "/js/**",
                                 "/images/**"

@@ -1,6 +1,8 @@
 package com.taico.interiorDesign.service.impl;
 
 import com.taico.interiorDesign.enums.ProjectStatus;
+import com.taico.interiorDesign.exception.ProjectAlreadyPaidException;
+import com.taico.interiorDesign.exception.ResourceNotFoundException;
 import com.taico.interiorDesign.model.dto.*;
 import com.taico.interiorDesign.model.entity.DesignFileEntity;
 import com.taico.interiorDesign.model.entity.ImageEntity;
@@ -87,8 +89,8 @@ public
 
         ProjectEntity project = projectRepository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException(
-                                "Проектът не е намерен с id: " + id
+                        new ResourceNotFoundException(
+                                "Проект с id " + id + " не е намерен."
                         )
                 );
 
@@ -401,140 +403,36 @@ public ProjectEntity findById(Long id) {
         return projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Проектът не е намерен"));
     }
+
+
+
     @Transactional
     public void payProject(
             Long projectId,
             String paymentMethod
     ) {
 
+
         ProjectEntity project =
                 projectRepository.findById(projectId)
-                        .orElseThrow();
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Проект с id " + projectId +
+                                                " не е намерен."
+                                )
+                        );
 
-        project.setStatus(
-                ProjectStatus.PAID
-        );
+        if (project.getStatus() == ProjectStatus.PAID) {
+            throw new ProjectAlreadyPaidException(
+                    "Проектът вече е платен."
+            );
+        }
+
+        project.setStatus(ProjectStatus.PAID);
 
         projectRepository.save(project);
     }
 
-
-//    @Override
-//    @Transactional
-//    public void uploadDesignFile(
-//            Long projectId,
-//            MultipartFile file,
-//            Authentication authentication
-//    ) {
-//
-//        if (file == null || file.isEmpty()) {
-//            throw new IllegalArgumentException(
-//                    "Моля, изберете файл."
-//            );
-//        }
-//
-//        CurrentUser currentUser =
-//                (CurrentUser) authentication.getPrincipal();
-//
-//        UserEntity admin =
-//                userRepository.findById(currentUser.getId())
-//                        .orElseThrow(() ->
-//                                new RuntimeException(
-//                                        "Администраторът не е намерен."
-//                                )
-//                        );
-//
-//        ProjectEntity project =
-//                projectRepository.findById(projectId)
-//                        .orElseThrow(() ->
-//                                new RuntimeException(
-//                                        "Проектът не е намерен."
-//                                )
-//                        );
-//
-//        try {
-//
-//            String uploadDir =
-//                    "uploads/designs/";
-//
-//            Path directory =
-//                    Paths.get(uploadDir);
-//
-//            Files.createDirectories(directory);
-//
-//            String originalFileName =
-//                    file.getOriginalFilename();
-//
-//            String extension = "";
-//
-//            if (originalFileName != null
-//                    && originalFileName.contains(".")) {
-//
-//                extension = originalFileName
-//                        .substring(
-//                                originalFileName.lastIndexOf(".")
-//                        );
-//            }
-//
-//            String storedFileName =
-//                    UUID.randomUUID() + extension;
-//
-//            Path filePath =
-//                    directory.resolve(storedFileName);
-//
-//            Files.copy(
-//                    file.getInputStream(),
-//                    filePath,
-//                    StandardCopyOption.REPLACE_EXISTING
-//            );
-//
-//
-//            DesignFileEntity designFile =
-//                    new DesignFileEntity();
-//
-//            designFile.setFileName(
-//                    originalFileName
-//            );
-//
-//            designFile.setFilePath(
-//                    filePath.toString()
-//            );
-//
-//            designFile.setContentType(
-//                    file.getContentType()
-//            );
-//
-//            designFile.setFileSize(
-//                    file.getSize()
-//            );
-//
-//            designFile.setProject(
-//                    project
-//            );
-//
-//            designFile.setUploadedBy(
-//                    admin
-//            );
-//
-//
-//            designFileRepository.save(
-//                    designFile
-//            );
-//
-//
-//            project.setStatus(
-//                    ProjectStatus.WAITING_FOR_CLIENT
-//            );
-//
-//            projectRepository.save(project);
-//
-//
-//        } catch (IOException e) {
-//
-//            throw new RuntimeException(
-//                    "Грешка при качването на файла.", e);
-//        }
-//    }
 
 
     @Override

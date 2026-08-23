@@ -16,6 +16,27 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+    <div class="container">
+
+        <a class="navbar-brand"
+           th:href="@{/admin}">
+            TA&CO Admin
+        </a>
+
+        <form th:action="@{/logout}"
+              method="post">
+
+            <button class="btn btn-outline-light">
+                Изход
+            </button>
+
+        </form>
+
+    </div>
+
+</nav>
 
 <div class="container py-5">
 

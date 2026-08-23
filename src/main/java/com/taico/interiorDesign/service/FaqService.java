@@ -17,4 +17,5 @@ public interface FaqService {
     FaqDTO toggleActive(Long id);
 
     void deleteFaq(Long id);
+
 }
