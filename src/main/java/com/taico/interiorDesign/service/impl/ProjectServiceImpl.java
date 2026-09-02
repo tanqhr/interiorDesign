@@ -14,6 +14,7 @@ import com.taico.interiorDesign.repositories.UserRepository;
 import com.taico.interiorDesign.security.CurrentUser;
 import com.taico.interiorDesign.service.FileUploadService;
 import com.taico.interiorDesign.service.ImageService;
+import com.taico.interiorDesign.service.NotificationService;
 import com.taico.interiorDesign.service.ProjectService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -43,14 +44,16 @@ public
     private final FileUploadService fileUploadService;
     private final ImageService imageService;
     private final DesignFileRepository designFileRepository;
+    private final NotificationService notificationService;
 
 
-    public ProjectServiceImpl(ProjectRepository projectRepository, UserRepository userRepository, FileUploadService fileUploadService, ImageService imageService, DesignFileRepository designFileRepository) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, UserRepository userRepository, FileUploadService fileUploadService, ImageService imageService, DesignFileRepository designFileRepository, NotificationService notificationService) {
         this.projectRepository = projectRepository;
         this.userRepository = userRepository;
         this.fileUploadService = fileUploadService;
         this.imageService = imageService;
         this.designFileRepository = designFileRepository;
+        this.notificationService = notificationService;
     }
 
     @Override
@@ -250,6 +253,13 @@ public
                 && dto.getPrice() != null) {
 
             project.setStatus(ProjectStatus.PENDING_PAYMENT);
+
+            notificationService.createNotification(
+                    project.getAuthor(),
+                    project,
+                    "Проектът „" + project.getTitle()
+                            + "“ очаква плащане."
+            );
 
         } else {
 
@@ -586,6 +596,14 @@ public ProjectEntity findById(Long id) {
             // защото вече има нов дизайн
 
             project.setClientFeedback(null);
+
+            notificationService.createNotification(
+                    project.getAuthor(),
+                    project,
+                    "Новият дизайн на проект „"
+                            + project.getTitle()
+                            + "“ е готов за преглед."
+            );
 
             projectRepository.save(project);
 

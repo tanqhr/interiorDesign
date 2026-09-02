@@ -90,7 +90,12 @@ import java.util.List;
         )
         private List<DesignFileEntity> designs = new ArrayList<>();
 
-
+        @OneToMany(
+                mappedBy = "project",
+                cascade = CascadeType.ALL,
+                orphanRemoval = true
+        )
+        private List<NotificationEntity> notifications = new ArrayList<>();
         // ======================
         // AUDIT
         // ======================

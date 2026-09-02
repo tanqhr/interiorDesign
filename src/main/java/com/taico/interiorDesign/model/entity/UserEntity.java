@@ -60,6 +60,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "uploadedBy")
     private List<DesignFileEntity> uploadedDesigns = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<NotificationEntity> notifications = new ArrayList<>();
+
     // ======================
     // AUDIT FIELDS
     // ======================
