@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/interior_design_test?useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_unicode_ci
+    username: root
+    password: 12345
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
+
+  cache:
+    type: caffeine
+    cache-names:
+      - cityNames
+    caffeine:
+      spec: maximumSize=100,expireAfterWrite=24h
+
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+
+app:
+  upload-dir: uploads-test
+
